@@ -1,8 +1,8 @@
 const mangluData = {
     empresa: {
         nombre: "Manglü",
-        telefonoWhatsApp: "573143731456",
-        telefonoFormateado: "314 373 1456",
+        telefonoWhatsApp: "573219243831",
+        telefonoFormateado: "321 924 3831",
         instagram: "@_manglu01",
         copyright: "© 2026 Manglü. Todos los derechos reservados.",
         pais: "Colombia 🇨🇴"
