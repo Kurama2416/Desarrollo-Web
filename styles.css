@@ -8,12 +8,8 @@
     --white: #FFFFFF;
     --font-heading: 'Playfair Display', Georgia, serif;
     --font-body: 'Poppins', sans-serif;
-
-    /* Tono verde brillante para hover secundario si se requiere */
     --hover-green: #155E27;
 }
-
-/* Reseteo Global */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -38,7 +34,7 @@ img {
     display: block;
 }
 
-/* Header & Navbar */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -60,7 +56,6 @@ img {
     letter-spacing: 1px;
 }
 
-/* Botón menú hamburguesa con animación suave a 'X' */
 .nav-toggle {
     background: none;
     border: none;
@@ -85,7 +80,7 @@ img {
     transform-origin: center;
 }
 
-/* Transformación a 'X' al activarse (.active) */
+
 .nav-toggle.active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
 }
@@ -99,7 +94,6 @@ img {
     transform: translateY(-9px) rotate(-45deg);
 }
 
-/* Menú Desplegable Móvil */
 .nav-menu {
     position: absolute;
     top: 100%;
@@ -140,14 +134,12 @@ img {
     transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
-/* Inversión Navbar: Fondo transparente a Verde Oscuro con texto Amarillo */
 .nav-menu a:hover {
     background-color: var(--dark-green);
     color: var(--bg-yellow);
     border-color: var(--dark-green);
 }
 
-/* Botones con cambio de color plano / Inversión de Colores */
 .btn {
     display: inline-block;
     padding: 0.8rem 1.6rem;
@@ -172,8 +164,6 @@ img {
 .btn-header-desktop {
     display: none;
 }
-
-/* Botón secundario hero (ej: "Ver menú"): Transparente -> Fondo Verde Oscuro / Texto Amarillo */
 .btn-secondary {
     background-color: transparent;
     border: 1.5px solid var(--dark-green);
@@ -185,8 +175,6 @@ img {
     color: var(--bg-yellow);
     border-color: var(--dark-green);
 }
-
-/* Botones de tarjetas de menú ("Pedir este 🍦") */
 .btn-outline {
     background-color: transparent;
     border: 1.5px solid var(--dark-green);
@@ -215,7 +203,7 @@ img {
     background-color: var(--hover-green);
 }
 
-/* Hero Section */
+
 .hero {
     padding: 3rem 2rem 5rem 2rem;
 }
@@ -336,7 +324,7 @@ img {
     opacity: 0.8;
 }
 
-/* Sección Menú */
+
 .menu-section {
     background-color: var(--bg-cream);
     padding: 6rem 2rem;
@@ -447,8 +435,6 @@ img {
     margin-bottom: 1.4rem;
     min-height: 42px;
 }
-
-/* Sección Nosotros */
 .about-section {
     background-color: var(--card-green);
     color: var(--white);
@@ -519,7 +505,7 @@ img {
     opacity: 0.8;
 }
 
-/* Galería Feed */
+
 .gallery-section {
     background-color: var(--bg-cream);
     padding: 6rem 2rem;
@@ -566,7 +552,7 @@ img {
     text-align: center;
 }
 
-/* CTA WhatsApp */
+
 .cta-whatsapp {
     background-color: var(--bg-yellow);
     padding: 6rem 2rem;
@@ -605,7 +591,6 @@ img {
     margin-top: 1rem;
 }
 
-/* Footer */
 .footer {
     background-color: var(--dark-green);
     color: var(--white);
@@ -656,8 +641,6 @@ img {
     font-size: 0.85rem;
     opacity: 0.7;
 }
-
-/* Responsivo para Escritorio (768px+) */
 @media (min-width: 768px) {
     .header {
         padding: 1.2rem 4rem;
