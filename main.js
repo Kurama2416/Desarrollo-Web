@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const wppLink = `https://wa.me/${mangluData.empresa.telefonoWhatsApp}`;
 
-    // 1. Render Navegación
+    
     const navList = document.getElementById('navList');
     if (navList) {
         navList.innerHTML = mangluData.navegacion.map(item => `
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // 2. Render Hero
+    
     const heroContainer = document.getElementById('heroContainer');
     if (heroContainer) {
         const h = mangluData.hero;
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // 3. Render Header Menú
+    
     const menuHeader = document.getElementById('menuHeader');
     if (menuHeader) {
         const m = mangluData.seccionMenu;
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // 4. Render Productos (Los 9 elementos)
+    
     const productsGrid = document.getElementById('productsGrid');
     if (productsGrid) {
         productsGrid.innerHTML = mangluData.productos.map(prod => `
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // 5. Render Nosotros
+    
     const aboutContainer = document.getElementById('aboutContainer');
     if (aboutContainer) {
         const ab = mangluData.historia;
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // 6. Render Galería
+    
     const galleryHeader = document.getElementById('galleryHeader');
     const galleryGrid = document.getElementById('galleryGrid');
     const galleryFooter = document.getElementById('galleryFooter');
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // 7. Render CTA & Footer
+    
     const ctaContainer = document.getElementById('ctaContainer');
     if (ctaContainer) {
         const c = mangluData.cta;
@@ -176,13 +176,13 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Configurar enlaces universales de WhatsApp
+    
     document.querySelectorAll('.btn-wpp').forEach(btn => {
         btn.href = wppLink;
         btn.target = "_blank";
     });
 
-    // Menú móvil con toggle animado a X
+    
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
     if (navToggle && navMenu) {
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navMenu.classList.toggle('active');
         });
 
-        // Cerrar menú móvil automáticamente al pulsar en cualquier opción
+       
         navMenu.addEventListener('click', (e) => {
             if (e.target.tagName === 'A') {
                 navToggle.classList.remove('active');
