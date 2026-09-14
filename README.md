@@ -1,70 +1,60 @@
-# 🥭 Manglü - Sitio Web Oficial & Plataforma de Pedidos
+# Informe de Práctica: Sistema CLI de Gestión de Tareas
 
-Plataforma web desarrollada para **Manglü**, negocio especializado en granizados, toppings y bebidas artesanales a base de frutas tropicales ubicado en San Gil (Centro Comercial San Gil Plaza, Local 218).
-
-El objetivo del proyecto es digitalizar la presencia del comercio, presentar su catálogo interactivo de productos y construir una arquitectura escalable lista para producción.
-
----
-
-## 🎯 Objetivo del Proyecto
-
-Transformar la presencia digital de Manglü mediante una aplicación web funcional que permita:
-* **Exhibir el menú interactivo:** Catálogo visual con precios, productos estrella (Manglü, Granizado de Lulo, Maracuyá, Tamarindo, etc.) e ingredientes.
-* **Procesar pedidos a domicilio:** Enrutamiento de pedidos directamente hacia WhatsApp sin intermediarios.
-* **Escalabilidad técnica:** Implementación progresiva de arquitectura backend, persistencia de datos, autenticación y frontend moderno con React.
+**Asignatura:** Programación / Desarrollo Web con Node.js  
+**Módulo:** Manejo de Archivos (`fs`), Módulos Internos y Argumentos CLI (`process.argv`)  
+**Entorno de Ejecución:** Node.js v14+
 
 ---
 
-## 📂 Navegación por Sprints (Ramas)
+## 1. Descripción del Proyecto
 
-Haz clic en cualquier sprint para ir directamente al código y la documentación correspondiente de esa etapa:
+El presente proyecto consiste en el desarrollo de una aplicación de consola (CLI) construida sobre **Node.js**. Su objetivo principal es aplicar la persistencia de datos local mediante el módulo nativo `fs` (File System) y la manipulación de arreglos de objetos JSON. 
 
-| Sprint | Etapa / Tema | Estado | Enlace al Branch |
-| :---: | :--- | :---: | :---: |
-| **01** | Wireframe + Boceto (UI/UX en Figma) | 🎨 Completado | [Ver Sprint 1](../../tree/Sprint_1) |
-| **02** | HTML + CSS (Maquetación y Estilos) | 💻 En curso | [Ver Sprint 2](../../tree/Sprint_2) |
-| **03** | Template Engines | ⏳ Pendiente | *Próximamente* |
-| **04** | JSON + Métodos HTTP | ⏳ Pendiente | *Próximamente* |
-| **05** | Middlewares + Auth | ⏳ Pendiente | *Próximamente* |
-| **06** | Bases de Datos | ⏳ Pendiente | *Próximamente* |
-| **07** | Validaciones | ⏳ Pendiente | *Próximamente* |
-| **08** | APIs + React | ⏳ Pendiente | *Próximamente* |
+La aplicación permite realizar un flujo de operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre un listado de tareas a través de comandos ingresados desde la terminal.
 
 ---
 
-## 🗺️ Detalle de la Hoja de Ruta
+## 2. Arquitectura y Estructura de Archivos
 
-1. **Sprint 1: Wireframe + Boceto**
-   * Diseños de baja/alta fidelidad y prototipado interactivo del sitio en Figma.
-2. **Sprint 2: HTML + CSS**
-   * Maquetación estática, estilos visuales e interfaz *responsive*.
-3. **Sprint 3: Template Engines**
-   * Dinamización de vistas mediante motores de plantillas.
-4. **Sprint 4: JSON + Métodos HTTP**
-   * Persistencia inicial en archivos JSON y manejo de peticiones HTTP (GET, POST, PUT, DELETE).
-5. **Sprint 5: Middlewares + Auth**
-   * Validación de sesiones, protección de rutas y gestión de usuarios.
-6. **Sprint 6: Bases de Datos**
-   * Integración de base de datos para productos y pedidos.
-7. **Sprint 7: Validaciones**
-   * Control de errores, sanitización de datos y validación de formularios en backend y frontend.
-8. **Sprint 8: APIs + React**
-   * Desacoplamiento de la aplicación, arquitectura API REST y reconstrucción del cliente interactivo en React.
+La solución está modularizada para separar la lógica de presentación/interacción con el usuario de la lógica de manipulación de datos:
+
+* **`app.js`**: Funciona como el punto de entrada principal (Controlador/CLI). Captura y evalúa los parámetros ingresados en la consola (`process.argv`) enviando las peticiones a la capa de lógica.
+* **`funciondetareas.js`**: Módulo encargado de la lógica de negocio. Realiza la lectura y escritura sincrónica en el sistema de archivos (`fs.readFileSync` y `fs.writeFileSync`), además de aplicar métodos de arreglos (`filter`, `map`, `push`).
+* **`tareas.json`**: Fuente de datos estática en formato JSON que almacena el arreglo con la lista de tareas y sus respectivos estados (`pendiente`, `en proceso`, `terminada`).
 
 ---
 
-## 🛠️ Tecnologías del Proyecto
+## 3. Funcionalidades Implementadas
 
-* **Frontend:** HTML5, CSS3, JavaScript, React.js
-* **Backend & Datos:** Node.js, Template Engines, JSON, Bases de Datos
-* **Diseño & UI/UX:** Figma, Wireframe.cc
-* **Control de Versiones:** Git & GitHub
-
----
-
-## 👥 Equipo de Desarrollo
-
-* **[Oscar Javier Hernandez Morales]** - *Sistemas / Desarrollo Web*
-* **[Juan David Navarro Jiménez]** - *Sistemas / Desarrollo Web*
+1. **Lectura y Listado:** Carga el archivo `.json` y parsea los datos para mostrarlos en consola.
+2. **Creación:** Permite registrar una nueva tarea asignándole por defecto el estado `pendiente`.
+3. **Inicio Rápido:** Cambia de forma directa el estado de una tarea específica a `en proceso`.
+4. **Filtrado:** Utiliza el método `.filter()` para retornar solo las tareas que coincidan con un estado determinado.
+5. **Edición de Estado:** Actualiza el estado de cualquier tarea existente (`map()`).
+6. **Eliminación:** Filtra y remueve del arreglo todas las tareas asociadas a un estado en particular y guarda los cambios persistentes.
 
 ---
+
+## 4. Guía de Ejecución y Pruebas
+
+Para probar el correcto funcionamiento del sistema, ejecute los siguientes comandos en la terminal desde la raíz del proyecto:
+
+```bash
+# 1. Listar todas las tareas almacenadas
+node app.js listar
+
+# 2. Crear una nueva tarea (estado inicial: pendiente)
+node app.js crear "Avanzar proyecto"
+
+# 3. Iniciar la tarea (cambia estado a 'en proceso')
+node app.js iniciar "Avanzar proyecto"
+
+# 4. Filtrar tareas por estado
+node app.js filtrar "en proceso"
+
+# 5. Cambiar el estado manualmente a 'terminada'
+node app.js cambiarEstado "Avanzar proyecto" "terminada"
+
+# 6. Eliminar todas las tareas terminadas
+node app.js eliminarPorEstado "terminada"
+```
