@@ -15,14 +15,15 @@ Transformar la presencia digital de Manglü mediante una aplicación web funcion
 
 ---
 
-## 📂 Navegación por Sprints (Ramas)
+## 📂 Navegación por Sprints y Actividades (Ramas)
 
-Haz clic en cualquier sprint para ir directamente al código y la documentación correspondiente de esa etapa:
+Haz clic en cualquier sprint o sección para ir directamente al código y la documentación correspondiente de esa etapa:
 
-| Sprint | Etapa / Tema | Estado | Enlace al Branch |
+| Sprint / Sección | Etapa / Tema | Estado | Enlace al Branch |
 | :---: | :--- | :---: | :---: |
-| **01** | Wireframe + Boceto (UI/UX en Figma) | 🎨 Completado | [Ver Sprint 1](../../tree/Sprint_1) |
-| **02** | HTML + CSS (Maquetación y Estilos) | 💻 En curso | [Ver Sprint 2](../../tree/Sprint_2) |
+| **00** | Actividades & Laboratorios Prácticos | 🔄 En desarrollo | [Ver Activities](https://github.com/Kurama2416/Desarrollo-Web/tree/Activities) |
+| **01** | Wireframe + Boceto (UI/UX en Figma) | ✅ Completado | [Ver Sprint 1](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_1) |
+| **02** | HTML + CSS (Maquetación y Estilos) | 🔄 En desarrollo | [Ver Sprint 2](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_2) |
 | **03** | Template Engines | ⏳ Pendiente | *Próximamente* |
 | **04** | JSON + Métodos HTTP | ⏳ Pendiente | *Próximamente* |
 | **05** | Middlewares + Auth | ⏳ Pendiente | *Próximamente* |
@@ -34,6 +35,8 @@ Haz clic en cualquier sprint para ir directamente al código y la documentación
 
 ## 🗺️ Detalle de la Hoja de Ruta
 
+0. **Sprint 00: Actividades & Laboratorios Prácticos (`Activities`)**
+   * Ejercicios de clase, talleres complementarios y prácticas conceptuales (ej. utilidades CLI, manipulación de archivos `fs`, lógica en JavaScript, etc.).
 1. **Sprint 1: Wireframe + Boceto**
    * Diseños de baja/alta fidelidad y prototipado interactivo del sitio en Figma.
 2. **Sprint 2: HTML + CSS**
@@ -64,7 +67,5 @@ Haz clic en cualquier sprint para ir directamente al código y la documentación
 
 ## 👥 Equipo de Desarrollo
 
-* **[Oscar Javier Hernandez Morales]** - *Sistemas / Desarrollo Web*
-* **[Juan David Navarro Jiménez]** - *Sistemas / Desarrollo Web*
-
----
+* **Oscar Javier Hernández Morales** - *Sistemas / Desarrollo Web*
+* **Juan David Navarro Jiménez** - *Sistemas / Desarrollo Web*
