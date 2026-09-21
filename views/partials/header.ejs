@@ -1,0 +1,37 @@
+<header class="header">
+
+    <div class="logo-container">
+        <a href="#inicio" class="logo-link">
+            <div class="logo-badge">
+                <%= data.empresa.nombre.toUpperCase() %>
+            </div>
+        </a>
+    </div>
+
+    <nav class="nav-menu" id="navMenu">
+        <ul id="navList">
+
+            <% data.navegacion.forEach(item => { %>
+
+                <li>
+                    <a href="<%= item.link %>">
+                        <%= item.label %>
+                    </a>
+                </li>
+
+            <% }); %>
+
+        </ul>
+    </nav>
+
+    <a href="#contacto" class="btn btn-primary btn-header-desktop">
+        Pedir ahora
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+</header>

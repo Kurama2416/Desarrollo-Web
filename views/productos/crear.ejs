@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('../partials/head') %>
+
+<body>
+
+    <%- include('../partials/header') %>
+
+    <main>
+
+        <section class="menu-section">
+
+            <div class="section-header">
+
+                <span class="section-badge">
+                    ADMINISTRACIÓN
+                </span>
+
+                <h1>
+                    Crear producto
+                </h1>
+
+                <p>
+                    Agrega un nuevo producto al menú de Manglü.
+                </p>
+
+            </div>
+
+
+            <div class="product-form-container">
+
+                <form action="/productos" method="POST">
+
+                    <div class="form-group">
+
+                        <label for="nombre">
+                            Nombre del producto
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Ej: Granizado de Mango"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="precio">
+                            Precio
+                        </label>
+
+                        <input
+                            type="text"
+                            id="precio"
+                            name="precio"
+                            placeholder="Ej: $8.000"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="tag">
+                            Etiqueta
+                        </label>
+
+                        <input
+                            type="text"
+                            id="tag"
+                            name="tag"
+                            placeholder="Ej: Favorito"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="tagColor">
+                            Color de etiqueta
+                        </label>
+
+                        <select id="tagColor" name="tagColor" required>
+
+                            <option value="yellow">
+                                Amarillo
+                            </option>
+
+                            <option value="green">
+                                Verde
+                            </option>
+
+                            <option value="red">
+                                Rojo
+                            </option>
+
+                            <option value="purple">
+                                Morado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="descripcion">
+                            Descripción
+                        </label>
+
+                        <textarea
+                            id="descripcion"
+                            name="descripcion"
+                            rows="4"
+                            placeholder="Describe el producto..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="imagen">
+                            URL de la imagen
+                        </label>
+
+                        <input
+                            type="url"
+                            id="imagen"
+                            name="imagen"
+                            placeholder="https://..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <a
+                            href="/productos"
+                            class="btn btn-secondary"
+                        >
+                            Cancelar
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Guardar producto
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

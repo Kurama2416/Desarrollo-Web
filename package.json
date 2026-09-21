@@ -1,0 +1,17 @@
+{
+  "name": "desarrollo-web-sprint_2",
+  "version": "1.0.0",
+  "description": "En este segundo sprint se tradujo el prototipo de Figma a código funcional utilizando **HTML5**, **CSS3** y **JavaScript (ES6)**, implementando renderizado dinámico del catálogo de Manglü.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1"
+  }
+}

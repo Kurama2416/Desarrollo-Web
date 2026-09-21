@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('partials/head') %>
+
+<body>
+
+    <!-- HEADER -->
+
+   <%- include('partials/header') %>
+
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+
+        <div class="hero-container">
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    <%= data.hero.badge %>
+                </span>
+
+                <h1>
+                    <em><%= data.hero.tituloItalic %></em>
+                    <strong><%= data.hero.tituloBold %></strong>
+                </h1>
+
+                <p>
+                    <%= data.hero.descripcion %>
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#contacto" class="btn btn-primary">
+                        <%= data.hero.btnPrincipal %>
+                    </a>
+
+                    <a href="#menu" class="btn btn-secondary">
+                        <%= data.hero.btnSecundario %>
+                    </a>
+
+                </div>
+
+                <div class="hero-features">
+
+                    <% data.hero.caracteristicas.forEach(caracteristica => { %>
+
+                        <div class="hero-feature">
+                            <%= caracteristica %>
+                        </div>
+
+                    <% }); %>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <img
+                    src="<%= data.hero.cardDestacada.imagen %>"
+                    alt="<%= data.hero.cardDestacada.titulo %>"
+                >
+
+                <div class="hero-card-content">
+
+                    <h3>
+                        <%= data.hero.cardDestacada.titulo %>
+                    </h3>
+
+                    <strong>
+                        <%= data.hero.cardDestacada.precio %>
+                    </strong>
+
+                    <span>
+                        <%= data.hero.cardDestacada.rating %>
+                        <%= data.hero.cardDestacada.pedidos %>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MENÚ -->
+    <section id="menu" class="menu-section">
+
+        <div class="section-header">
+
+            <span class="section-badge">
+                <%= data.seccionMenu.subtitulo %>
+            </span>
+
+            <h2>
+                <%= data.seccionMenu.titulo %>
+            </h2>
+
+            <p>
+                <%= data.seccionMenu.descripcion %>
+            </p>
+
+        </div>
+
+
+        <div class="products-grid">
+
+            <% data.productos.forEach(producto => { %>
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="<%= producto.imagen %>"
+                            alt="<%= producto.nombre %>"
+                        >
+
+                        <span class="product-tag <%= producto.tagColor %>">
+                            <%= producto.tag %>
+                        </span>
+
+                    </div>
+
+                    <div class="product-content">
+
+                        <h3>
+                            <%= producto.nombre %>
+                        </h3>
+
+                        <p>
+                            <%= producto.descripcion %>
+                        </p>
+
+                        <div class="product-footer">
+
+                            <strong>
+                                <%= producto.precio %>
+                            </strong>
+
+                            <a
+                                href="https://wa.me/<%= data.empresa.telefonoWhatsApp %>"
+                                class="btn btn-small"
+                                target="_blank"
+                            >
+                                Pedir
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            <% }); %>
+
+        </div>
+
+    </section>
+
+
+    <!-- NOSOTROS -->
+    <section id="nosotros" class="about-section">
+
+        <div class="about-container">
+
+            <div class="about-content">
+
+                <span class="section-badge">
+                    <%= data.historia.badgeCard %>
+                </span>
+
+                <h2>
+                    <%= data.historia.titulo %>
+                </h2>
+
+                <p>
+                    <%= data.historia.parrafo1 %>
+                </p>
+
+                <p>
+                    <%= data.historia.parrafo2 %>
+                </p>
+
+
+                <div class="about-stats">
+
+                    <% data.historia.stats.forEach(stat => { %>
+
+                        <div class="stat">
+
+                            <strong>
+                                <%= stat.cifra %>
+                            </strong>
+
+                            <span>
+                                <%= stat.label %>
+                            </span>
+
+                        </div>
+
+                    <% }); %>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-image">
+
+                <img
+                    src="<%= data.historia.imagenHistoria %>"
+                    alt="Historia de Manglü"
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GALERÍA -->
+    <section id="galeria" class="gallery-section">
+
+        <div class="section-header">
+
+            <span class="section-badge">
+                <%= data.galeria.subtitulo %>
+            </span>
+
+            <h2>
+                <%= data.galeria.titulo %>
+            </h2>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+            <% data.galeria.imagenes.forEach(imagen => { %>
+
+                <div class="gallery-item">
+
+                    <img
+                        src="<%= imagen %>"
+                        alt="Producto Manglü"
+                    >
+
+                </div>
+
+            <% }); %>
+
+        </div>
+
+
+        <div class="gallery-footer">
+
+            <a
+                href="https://www.instagram.com/_manglu01"
+                target="_blank"
+                class="btn btn-secondary"
+            >
+                <%= data.galeria.btnInstagram %>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="cta-whatsapp">
+
+        <div class="cta-container">
+
+            <div class="cta-icon">
+                <%= data.cta.emoji %>
+            </div>
+
+            <h2>
+                <%= data.cta.titulo %>
+            </h2>
+
+            <p>
+                <%= data.cta.descripcion1 %>
+            </p>
+
+            <p>
+                <%= data.cta.descripcion2 %>
+            </p>
+
+            <a
+                href="https://wa.me/<%= data.empresa.telefonoWhatsApp %>"
+                class="btn btn-whatsapp"
+                target="_blank"
+            >
+                <%= data.cta.btnTexto %>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+   
+    <%- include('partials/footer') %>
+
+
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

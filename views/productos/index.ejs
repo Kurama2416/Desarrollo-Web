@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('../partials/head') %>
+
+<body>
+
+    <%- include('../partials/header') %>
+
+    <main>
+
+        <section class="menu-section">
+
+            <div class="section-header">
+
+                <span class="section-badge">
+                    ADMINISTRACIÓN
+                </span>
+
+                <h1>
+                    Productos Manglü
+                </h1>
+
+                <p>
+                    Administra los productos disponibles en el menú.
+                </p>
+
+                <a href="/productos/crear" class="btn btn-primary">
+                    + Crear producto
+                </a>
+
+            </div>
+
+            <div class="products-grid">
+
+                <% data.productos.forEach(producto => { %>
+
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            <img
+                                src="<%= producto.imagen %>"
+                                alt="<%= producto.nombre %>"
+                            >
+
+                            <span class="product-tag <%= producto.tagColor %>">
+                                <%= producto.tag %>
+                            </span>
+
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3>
+                                <%= producto.nombre %>
+                            </h3>
+
+                            <p>
+                                <%= producto.descripcion %>
+                            </p>
+
+                            <div class="product-footer">
+
+                                <strong>
+                                    <%= producto.precio %>
+                                </strong>
+
+                                <a
+                                    href="/productos/editar/<%= producto.id %>"
+                                    class="btn btn-small"
+                                >
+                                    Editar
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                <% }); %>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <%- include('../partials/footer') %>
+
+    <script src="/js/main.js"></script>
+
+</body>
+</html>
