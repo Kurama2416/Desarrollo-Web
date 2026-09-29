@@ -27,3 +27,8 @@ En este segundo sprint se tradujo el prototipo de Figma a código funcional util
 2. Abre el archivo `index.html` directamente en tu navegador preferido (o utiliza la extensión *Live Server* en VS Code).
 
 ---
+
+## 👥 Equipo de Desarrollo
+
+* **Oscar Javier Hernández Morales** - *Sistemas / Desarrollo Web*
+* **Juan David Navarro Jiménez** - *Sistemas / Desarrollo Web*
