@@ -16,3 +16,8 @@ En este primer sprint definimos la estructura visual, navegación y componentes 
   * **Prototipo en Figma:** [MANGLU EN FIGMA](https://www.figma.com/make/1x9sR5GTpbX64PpJQjBXdI/Landing-page-para-Mangl%C3%BC?t=NzicawJPBEsd4n2M-20&fullscreen=1)
 
 ---
+
+## 👥 Equipo de Desarrollo
+
+* **Oscar Javier Hernández Morales** - *Sistemas / Desarrollo Web*
+* **Juan David Navarro Jiménez** - *Sistemas / Desarrollo Web*
