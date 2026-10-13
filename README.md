@@ -139,20 +139,8 @@ Al crear o editar un producto, el servidor revisa los campos y vuelve a mostrar 
    ```bash
    npm install
    ```
-
-3. Iniciar el servidor:
-
-   ```bash
-   npm start
-   ```
-
-   Para desarrollo, con reinicio automático al guardar cambios:
-
-   ```bash
-   npm run dev
-   ```
-
-4. Abrir <http://localhost:3000> en el navegador.
+   
+3. Abrir <http://localhost:3000> en el navegador.
 
 ---
 
