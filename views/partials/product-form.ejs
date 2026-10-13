@@ -1,0 +1,82 @@
+            <% if (Object.keys(errors).length > 0) { %>
+                <div class="form-alert" role="alert">
+                    Revisa los campos marcados en rojo antes de continuar.
+                </div>
+            <% } %>
+
+            <form action="<%= action %>" method="POST" class="auth-form" novalidate>
+
+                <div class="form-group <%= errors.nombre ? 'has-error' : '' %>">
+                    <label for="nombre">Nombre del producto</label>
+                    <input type="text" id="nombre" name="nombre"
+                           value="<%= old.nombre || '' %>"
+                           placeholder="Ej: Granizado de Piña"
+                           aria-invalid="<%= errors.nombre ? 'true' : 'false' %>">
+                    <% if (errors.nombre) { %>
+                        <p class="form-error"><%= errors.nombre %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.precio ? 'has-error' : '' %>">
+                    <label for="precio">Precio (COP)</label>
+                    <input type="number" id="precio" name="precio" min="0" step="100"
+                           value="<%= old.precio || '' %>"
+                           placeholder="8000"
+                           aria-invalid="<%= errors.precio ? 'true' : 'false' %>">
+                    <% if (errors.precio) { %>
+                        <p class="form-error"><%= errors.precio %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.tag ? 'has-error' : '' %>">
+                    <label for="tag">Etiqueta</label>
+                    <input type="text" id="tag" name="tag"
+                           value="<%= old.tag || '' %>"
+                           placeholder="Ej: Nuevo, Popular, Tropical"
+                           aria-invalid="<%= errors.tag ? 'true' : 'false' %>">
+                    <% if (errors.tag) { %>
+                        <p class="form-error"><%= errors.tag %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.tagColor ? 'has-error' : '' %>">
+                    <label for="tagColor">Color de la etiqueta</label>
+                    <select id="tagColor" name="tagColor"
+                            aria-invalid="<%= errors.tagColor ? 'true' : 'false' %>">
+                        <option value="">Elige un color</option>
+                        <% coloresTag.forEach(c => { %>
+                            <option value="<%= c.valor %>" <%= old.tagColor === c.valor ? 'selected' : '' %>><%= c.nombre %></option>
+                        <% }) %>
+                    </select>
+                    <% if (errors.tagColor) { %>
+                        <p class="form-error"><%= errors.tagColor %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.descripcion ? 'has-error' : '' %>">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="4"
+                              placeholder="Cuenta de qué está hecho y cómo sabe."
+                              aria-invalid="<%= errors.descripcion ? 'true' : 'false' %>"><%= old.descripcion || '' %></textarea>
+                    <% if (errors.descripcion) { %>
+                        <p class="form-error"><%= errors.descripcion %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.imagen ? 'has-error' : '' %>">
+                    <label for="imagen">Imagen</label>
+                    <input type="text" id="imagen" name="imagen"
+                           value="<%= old.imagen || '' %>"
+                           placeholder="/img/mango.jpg"
+                           aria-invalid="<%= errors.imagen ? 'true' : 'false' %>">
+                    <p class="form-hint">Ruta de una imagen dentro de public/img, por ejemplo /img/mango.jpg.</p>
+                    <% if (errors.imagen) { %>
+                        <p class="form-error"><%= errors.imagen %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><%= submitText %></button>
+                    <a href="/productos" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>

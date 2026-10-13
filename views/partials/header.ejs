@@ -1,0 +1,27 @@
+    <header class="header">
+        <div class="logo-container">
+            <a href="/" class="logo-link">
+                <div class="logo-badge">MANGLÜ</div>
+            </a>
+        </div>
+
+        <nav class="nav-menu" id="navMenu">
+            <ul id="navList">
+                <% data.navegacion.forEach(item => { %>
+                    <li><a href="<%= item.link %>"><%= item.label %></a></li>
+                <% }) %>
+                <li><a href="/productos">Productos</a></li>
+                <li><a href="/carrito">Carrito</a></li>
+                <li><a href="/registro">Registro</a></li>
+                <li><a href="/login">Ingresar</a></li>
+            </ul>
+        </nav>
+
+        <a href="/#contacto" class="btn btn-primary btn-header-desktop">Pedir ahora</a>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir Menú" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>

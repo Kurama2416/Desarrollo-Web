@@ -1,0 +1,80 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+    <main class="detail-section">
+        <div class="detail-container">
+
+            <nav class="breadcrumb" aria-label="Ruta de navegación">
+                <a href="/">Inicio</a>
+                <span>/</span>
+                <a href="/#menu">Menú</a>
+                <span>/</span>
+                <span><%= producto.nombre %></span>
+            </nav>
+
+            <div class="detail-grid">
+                <div class="detail-image">
+                    <span class="tag tag-<%= producto.tagColor %>"><%= producto.tag %></span>
+                    <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                </div>
+
+                <div class="detail-info">
+                    <span class="sub-label">DETALLE DEL PRODUCTO</span>
+                    <h1><%= producto.nombre %></h1>
+                    <p class="detail-price"><%= formatPrice(producto.precio) %></p>
+                    <p class="detail-description"><%= producto.descripcion %></p>
+
+                    <ul class="detail-features">
+                        <% data.hero.caracteristicas.forEach(f => { %>
+                            <li><%= f %></li>
+                        <% }) %>
+                    </ul>
+
+                    <div class="detail-quantity">
+                        <label for="cantidad">Cantidad</label>
+                        <select id="cantidad" name="cantidad">
+                            <% for (let i = 1; i <= 10; i++) { %>
+                                <option value="<%= i %>"><%= i %></option>
+                            <% } %>
+                        </select>
+                    </div>
+
+                    <div class="detail-actions">
+                        <a href="/carrito" class="btn btn-primary">Agregar al carrito 🛒</a>
+                        <a href="<%= wppLink %>?text=Hola!%20Quiero%20pedir%20un%20<%= encodeURIComponent(producto.nombre) %>"
+                           target="_blank" rel="noopener noreferrer" class="btn btn-outline">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="related-section">
+                <div class="section-header">
+                    <span class="sub-label">MÁS SABORES</span>
+                    <h2>También te puede gustar</h2>
+                </div>
+                <div class="products-grid">
+                    <% relacionados.forEach(prod => { %>
+                        <article class="product-card">
+                            <div class="product-img-wrapper">
+                                <span class="tag tag-<%= prod.tagColor %>"><%= prod.tag %></span>
+                                <a href="/producto/<%= prod.id %>">
+                                    <img src="<%= prod.imagen %>" alt="<%= prod.nombre %>">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-title-price">
+                                    <h3><a href="/producto/<%= prod.id %>"><%= prod.nombre %></a></h3>
+                                    <span class="price"><%= formatPrice(prod.precio) %></span>
+                                </div>
+                                <p><%= prod.descripcion %></p>
+                                <a href="/producto/<%= prod.id %>" class="btn btn-outline">Ver detalle</a>
+                            </div>
+                        </article>
+                    <% }) %>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+<%- include('../partials/footer') %>

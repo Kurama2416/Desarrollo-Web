@@ -1,0 +1,92 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+    <main class="auth-section">
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <span class="sub-label">ÚNETE A MANGLÜ</span>
+                <h1>Crear cuenta</h1>
+                <p>Regístrate para ver tu historial de compras y pedir más rápido la próxima vez.</p>
+            </div>
+
+            <% if (Object.keys(errors).length > 0) { %>
+                <div class="form-alert" role="alert">
+                    Revisa los campos marcados en rojo antes de continuar.
+                </div>
+            <% } %>
+
+            <form action="/registro" method="POST" class="auth-form" novalidate>
+
+                <div class="form-group <%= errors.nombre ? 'has-error' : '' %>">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre"
+                           value="<%= old.nombre || '' %>"
+                           placeholder="Ej: María Pérez" autocomplete="name"
+                           aria-invalid="<%= errors.nombre ? 'true' : 'false' %>">
+                    <% if (errors.nombre) { %>
+                        <p class="form-error"><%= errors.nombre %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.correo ? 'has-error' : '' %>">
+                    <label for="correo">Correo electrónico</label>
+                    <input type="email" id="correo" name="correo"
+                           value="<%= old.correo || '' %>"
+                           placeholder="nombre@correo.com" autocomplete="email"
+                           aria-invalid="<%= errors.correo ? 'true' : 'false' %>">
+                    <% if (errors.correo) { %>
+                        <p class="form-error"><%= errors.correo %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.telefono ? 'has-error' : '' %>">
+                    <label for="telefono">Teléfono <span class="optional">(opcional)</span></label>
+                    <input type="tel" id="telefono" name="telefono"
+                           value="<%= old.telefono || '' %>"
+                           placeholder="3001234567" autocomplete="tel"
+                           aria-invalid="<%= errors.telefono ? 'true' : 'false' %>">
+                    <% if (errors.telefono) { %>
+                        <p class="form-error"><%= errors.telefono %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.password ? 'has-error' : '' %>">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password"
+                           placeholder="Mínimo 8 caracteres" autocomplete="new-password"
+                           aria-invalid="<%= errors.password ? 'true' : 'false' %>">
+                    <% if (errors.password) { %>
+                        <p class="form-error"><%= errors.password %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.confirmar ? 'has-error' : '' %>">
+                    <label for="confirmar">Confirmar contraseña</label>
+                    <input type="password" id="confirmar" name="confirmar"
+                           placeholder="Repite tu contraseña" autocomplete="new-password"
+                           aria-invalid="<%= errors.confirmar ? 'true' : 'false' %>">
+                    <% if (errors.confirmar) { %>
+                        <p class="form-error"><%= errors.confirmar %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group form-check <%= errors.terminos ? 'has-error' : '' %>">
+                    <label for="terminos">
+                        <input type="checkbox" id="terminos" name="terminos" value="si">
+                        Acepto los términos y condiciones
+                    </label>
+                    <% if (errors.terminos) { %>
+                        <p class="form-error"><%= errors.terminos %></p>
+                    <% } %>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear cuenta</button>
+            </form>
+
+            <p class="auth-alt">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+
+        </div>
+    </main>
+
+<%- include('partials/footer') %>

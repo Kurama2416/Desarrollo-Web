@@ -1,34 +1,108 @@
-# Sprint 3 — Implementación de EJS
+# 💻 Sprint 3 — Catálogo de productos con Node.js + Express + EJS
 
-## 📌 Descripción
+Sitio web de **Manglü**, granizados artesanales colombianos. Aplicación **Node.js + Express** con estructura **MVC** y vistas **EJS**. En este sprint se agregó la gestión de productos: listado, formulario de carga y formulario de edición.
 
-En este Sprint se implementará el motor de templates **EJS** en la aplicación **Node.js + Express**, con el propósito de reutilizar componentes, organizar las vistas y mostrar contenido dinámico.
+---
 
-## 🎯 Objetivos
+## 📋 Tablero de trabajo
 
-- Convertir las vistas HTML a formato `.ejs`.
-- Organizar las vistas en subcarpetas.
-- Crear componentes reutilizables mediante `partials`.
-- Mostrar contenido dinámico.
-- Implementar formularios funcionales para crear y editar productos.
+🔗 **[PEGAR AQUÍ EL ENLACE A TRELLO O GITHUB PROJECTS]**
 
-## 🛠️ Tecnologías
+---
 
-- Node.js
-- Express
-- EJS
-- HTML
-- CSS
-- JavaScript
-- GitHub
+## 📂 Estructura del proyecto
 
-## 📋 Documentación ágil
+```
+Desarrollo-Web-Sprint_3/
+├── app.js                     # Servidor Express
+├── package.json
+├── models/
+│   └── productModel.js        # Listar, buscar, crear y editar productos
+├── controllers/
+│   ├── mainController.js      # Home, detalle y carrito
+│   ├── authController.js      # Registro y login (maqueta)
+│   └── productController.js   # Listado, crear y editar productos
+├── routes/
+│   ├── main.js
+│   ├── auth.js
+│   └── products.js
+├── data/
+│   ├── products.js            # Productos y textos del sitio
+│   └── cart.js                # Datos de ejemplo del carrito
+├── views/
+│   ├── partials/              # head, header, footer, product-form
+│   ├── productos/             # index, detalle, crear, editar
+│   ├── index.ejs
+│   ├── carrito.ejs
+│   ├── registro.ejs
+│   └── login.ejs
+├── public/
+│   ├── css/styles.css
+│   ├── js/main.js
+│   └── img/
+├── retro.md
+└── README.md
+```
 
-- `retro.md` — Retrospectiva del Sprint mediante la dinámica de la estrella de mar.
-- `daily.md` — Seguimiento de las reuniones del equipo.
-- Tablero de trabajo — Organización y seguimiento de las tareas.
+---
 
-## 👥 Equipo de Desarrollo
+## 🌐 Páginas y rutas
 
-* **Oscar Javier Hernández Morales** - *Sistemas / Desarrollo Web*
-* **Juan David Navarro Jiménez** - *Sistemas / Desarrollo Web*
+| Método | Ruta | Página |
+|---|---|---|
+| GET | `/` | Home |
+| GET | `/productos` | Listado de productos |
+| GET | `/producto/:id` | Detalle de producto |
+| GET | `/productos/crear` | Formulario de carga de producto |
+| POST | `/productos` | Guardar producto nuevo |
+| GET | `/productos/:id/editar` | Formulario de edición |
+| POST | `/productos/:id/editar` | Guardar cambios |
+| GET | `/carrito` | Carrito de compras |
+| GET / POST | `/registro` | Registro |
+| GET / POST | `/login` | Login |
+
+---
+
+## 🎯 Alcance del sprint
+
+**Funciona:**
+- Listado de productos con enlaces al detalle y a la edición.
+- Crear y editar productos con validación de los campos y mensajes de error visibles.
+- Los cambios se reflejan en el home y en el detalle.
+
+**Limitaciones conocidas:**
+- Los productos se guardan **en memoria**: al reiniciar el servidor se pierden los cambios.
+- El carrito, el registro y el login siguen siendo maqueta (no guardan ni autentican).
+
+---
+
+## 🚀 Cómo ejecutar el proyecto
+
+1. Instalar [Node.js](https://nodejs.org/) (versión 18 o superior).
+2. Instalar las dependencias:
+
+```bash
+   npm install
+```
+
+3. Iniciar el servidor:
+
+```bash
+   npm start
+```
+
+4. Abrir <http://localhost:3000> en el navegador.
+
+---
+
+## 📝 Documentación ágil
+
+- [`retro.md`](./retro.md) — Retrospectiva del sprint 2 (estrella de mar).
+- Tablero de trabajo — enlace al inicio de este documento.
+
+---
+
+## 👥 Equipo de desarrollo
+
+- **Oscar Javier Hernández Morales** — Sistemas / Desarrollo Web
+- **Juan David Navarro Jiménez** — Sistemas / Desarrollo Web
