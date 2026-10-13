@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "firstName": "Camila",
+    "lastName": "Rojas",
+    "email": "camila.rojas@example.com",
+    "password": "Mg#4821x",
+    "category": "admin",
+    "image": "https://robohash.org/camilarojas.png?size=80x80&set=set1"
+  },
+  {
+    "id": 2,
+    "firstName": "Andrés",
+    "lastName": "Gómez",
+    "email": "andres.gomez@example.com",
+    "password": "Rx!7390a",
+    "category": "admin",
+    "image": "https://robohash.org/andresgomez.png?size=80x80&set=set1"
+  },
+  {
+    "id": 3,
+    "firstName": "Valentina",
+    "lastName": "Pérez",
+    "email": "valentina.perez@example.com",
+    "password": "Vl$5512p",
+    "category": "customer",
+    "image": "https://robohash.org/valentinaperez.png?size=80x80&set=set1"
+  },
+  {
+    "id": 4,
+    "firstName": "Santiago",
+    "lastName": "Torres",
+    "email": "santiago.torres@example.com",
+    "password": "St@6044k",
+    "category": "customer",
+    "image": "https://robohash.org/santiagotorres.png?size=80x80&set=set1"
+  },
+  {
+    "id": 5,
+    "firstName": "Laura",
+    "lastName": "Martínez",
+    "email": "laura.martinez@example.com",
+    "password": "Lm#2287z",
+    "category": "customer",
+    "image": "https://robohash.org/lauramartinez.png?size=80x80&set=set1"
+  },
+  {
+    "id": 6,
+    "firstName": "Mateo",
+    "lastName": "Ramírez",
+    "email": "mateo.ramirez@example.com",
+    "password": "Mr!9135q",
+    "category": "customer",
+    "image": "https://robohash.org/mateoramirez.png?size=80x80&set=set1"
+  },
+  {
+    "id": 7,
+    "firstName": "Daniela",
+    "lastName": "Castro",
+    "email": "daniela.castro@example.com",
+    "password": "Dc$3370w",
+    "category": "customer",
+    "image": "https://robohash.org/danielacastro.png?size=80x80&set=set1"
+  },
+  {
+    "id": 8,
+    "firstName": "Sebastián",
+    "lastName": "Moreno",
+    "email": "sebastian.moreno@example.com",
+    "password": "Sm@8816n",
+    "category": "customer",
+    "image": "https://robohash.org/sebastianmoreno.png?size=80x80&set=set1"
+  },
+  {
+    "id": 9,
+    "firstName": "Isabella",
+    "lastName": "Vargas",
+    "email": "isabella.vargas@example.com",
+    "password": "Iv#1749t",
+    "category": "customer",
+    "image": "https://robohash.org/isabellavargas.png?size=80x80&set=set1"
+  },
+  {
+    "id": 10,
+    "firstName": "Juan",
+    "lastName": "Herrera",
+    "email": "juan.herrera@example.com",
+    "password": "Jh!5503y",
+    "category": "customer",
+    "image": "https://robohash.org/juanherrera.png?size=80x80&set=set1"
+  }
+]

@@ -1,0 +1,60 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+    <main class="list-section">
+        <div class="list-container">
+
+            <nav class="breadcrumb" aria-label="Ruta de navegación">
+                <a href="/">Inicio</a>
+                <span>/</span>
+                <span>Productos</span>
+            </nav>
+
+            <div class="list-toolbar">
+                <div>
+                    <span class="sub-label">CATÁLOGO</span>
+                    <h1>Productos</h1>
+                    <p class="list-count"><%= products.length %> <%= products.length === 1 ? 'producto' : 'productos' %> disponibles</p>
+                </div>
+                <a href="/products/create" class="btn btn-primary">+ Nuevo producto</a>
+            </div>
+
+            <% if (products.length === 0) { %>
+                <div class="cart-empty">
+                    <p>Todavía no hay productos 🍧</p>
+                    <a href="/products/create" class="btn btn-primary">Crear el primero</a>
+                </div>
+            <% } else { %>
+                <div class="products-grid">
+                    <% products.forEach(product => { %>
+                        <article class="product-card">
+                            <div class="product-img-wrapper">
+                                <span class="tag tag-<%= tagColor(product.category) %>"><%= product.category %></span>
+                                <a href="/products/<%= product.id %>">
+                                    <img src="<%= product.image %>" alt="<%= product.name %>">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-title-price">
+                                    <h3><a href="/products/<%= product.id %>"><%= product.name %></a></h3>
+                                    <span class="price"><%= formatPrice(product.price) %></span>
+                                </div>
+                                <p><%= product.description %></p>
+                                <div class="card-actions">
+                                    <a href="/products/<%= product.id %>" class="btn btn-outline">Ver detalle</a>
+                                    <a href="/products/<%= product.id %>/edit" class="btn btn-secondary">Editar</a>
+                                    <form action="/products/<%= product.id %>?_method=DELETE" method="POST"
+                                          onsubmit="return confirm('¿Seguro que quieres eliminar este producto?')">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                    <% }) %>
+                </div>
+            <% } %>
+
+        </div>
+    </main>
+
+<%- include('partials/footer') %>

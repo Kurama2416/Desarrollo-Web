@@ -1,0 +1,91 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+    <main class="detail-section">
+        <div class="detail-container">
+
+            <nav class="breadcrumb" aria-label="Ruta de navegación">
+                <a href="/">Inicio</a>
+                <span>/</span>
+                <a href="/products">Productos</a>
+                <span>/</span>
+                <span><%= product.name %></span>
+            </nav>
+
+            <div class="detail-grid">
+                <div class="detail-image">
+                    <span class="tag tag-<%= tagColor(product.category) %>"><%= product.category %></span>
+                    <img src="<%= product.image %>" alt="<%= product.name %>">
+                </div>
+
+                <div class="detail-info">
+                    <span class="sub-label">DETALLE DEL PRODUCTO</span>
+                    <h1><%= product.name %></h1>
+                    <p class="detail-price"><%= formatPrice(product.price) %></p>
+                    <p class="detail-description"><%= product.description %></p>
+
+                    <ul class="detail-features">
+                        <% data.hero.caracteristicas.forEach(f => { %>
+                            <li><%= f %></li>
+                        <% }) %>
+                    </ul>
+
+                    <div class="detail-options">
+                        <div class="detail-quantity">
+                            <label for="size">Tamaño</label>
+                            <select id="size" name="size">
+                                <% product.sizes.forEach(size => { %>
+                                    <option value="<%= size %>"><%= size %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+
+                        <div class="detail-quantity">
+                            <label for="quantity">Cantidad</label>
+                            <select id="quantity" name="quantity">
+                                <% for (let i = 1; i <= 10; i++) { %>
+                                    <option value="<%= i %>"><%= i %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="detail-actions">
+                        <a href="/carrito" class="btn btn-primary">Agregar al carrito 🛒</a>
+                        <a href="<%= wppLink %>?text=Hola!%20Quiero%20pedir%20un%20<%= encodeURIComponent(product.name) %>"
+                           target="_blank" rel="noopener noreferrer" class="btn btn-outline">Pedir por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="related-section">
+                <div class="section-header">
+                    <span class="sub-label">MÁS SABORES</span>
+                    <h2>También te puede gustar</h2>
+                </div>
+                <div class="products-grid">
+                    <% related.forEach(item => { %>
+                        <article class="product-card">
+                            <div class="product-img-wrapper">
+                                <span class="tag tag-<%= tagColor(item.category) %>"><%= item.category %></span>
+                                <a href="/products/<%= item.id %>">
+                                    <img src="<%= item.image %>" alt="<%= item.name %>">
+                                </a>
+                            </div>
+                            <div class="product-info">
+                                <div class="product-title-price">
+                                    <h3><a href="/products/<%= item.id %>"><%= item.name %></a></h3>
+                                    <span class="price"><%= formatPrice(item.price) %></span>
+                                </div>
+                                <p><%= item.description %></p>
+                                <a href="/products/<%= item.id %>" class="btn btn-outline">Ver detalle</a>
+                            </div>
+                        </article>
+                    <% }) %>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+<%- include('partials/footer') %>

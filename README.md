@@ -1,71 +1,180 @@
-# 🥭 Manglü - Sitio Web Oficial & Plataforma de Pedidos
+# 💻 Sprint 4 — CRUD de productos con Node.js + Express + EJS
 
-Plataforma web desarrollada para **Manglü**, negocio especializado en granizados, toppings y bebidas artesanales a base de frutas tropicales ubicado en San Gil (Centro Comercial San Gil Plaza, Local 218).
-
-El objetivo del proyecto es digitalizar la presencia del comercio, presentar su catálogo interactivo de productos y construir una arquitectura escalable lista para producción.
+Sitio web de **Manglü**, granizados artesanales colombianos. Aplicación **Node.js + Express** con vistas **EJS** y los datos guardados en archivos **JSON**. En este sprint se implementó la administración completa de productos: listado, detalle, creación, edición y eliminación.
 
 ---
 
-## 🎯 Objetivo del Proyecto
+## 📋 Tablero de trabajo
 
-Transformar la presencia digital de Manglü mediante una aplicación web funcional que permita:
-* **Exhibir el menú interactivo:** Catálogo visual con precios, productos estrella (Manglü, Granizado de Lulo, Maracuyá, Tamarindo, etc.) e ingredientes.
-* **Procesar pedidos a domicilio:** Enrutamiento de pedidos directamente hacia WhatsApp sin intermediarios.
-* **Escalabilidad técnica:** Implementación progresiva de arquitectura backend, persistencia de datos, autenticación y frontend moderno con React.
+🔗 **[PEGAR AQUÍ EL ENLACE A TRELLO O GITHUB PROJECTS]**
 
 ---
 
-## 📂 Navegación por Sprints y Actividades (Ramas)
+## 📂 Estructura del proyecto
 
-Haz clic en cualquier sprint o sección para ir directamente al código y la documentación correspondiente de esa etapa:
+```
+Desarrollo-Web-Sprint_4/
+├── .gitignore
+├── package.json
+├── README.md
+├── retro.md
+├── public/
+│   ├── css/styles.css
+│   └── js/main.js
+└── src/
+    ├── index.js                      # Servidor Express
+    ├── controllers/
+    │   ├── mainController.js         # Inicio y carrito
+    │   ├── authController.js         # Registro y login (maqueta)
+    │   └── productController.js      # CRUD de productos
+    ├── database/
+    │   ├── products.json             # Datos de productos
+    │   ├── users.json                # Datos de usuarios
+    │   ├── site.json                 # Textos del sitio (menú, portada, galería...)
+    │   └── cart.json                 # Carrito de ejemplo
+    ├── middlewares/
+    │   ├── logger.js                 # Registra cada petición en consola
+    │   └── locals.js                 # Deja datos y funciones disponibles en las vistas
+    ├── routes/
+    │   ├── main.routes.js
+    │   ├── auth.routes.js
+    │   └── products.routes.js
+    └── views/
+        ├── partials/                 # head, header, footer, product-form
+        ├── home.ejs                  # Inicio
+        ├── index.ejs                 # Listado de productos
+        ├── detail.ejs                # Detalle de producto
+        ├── create.ejs                # Formulario de creación
+        ├── edit.ejs                  # Formulario de edición
+        ├── carrito.ejs
+        ├── registro.ejs
+        └── login.ejs
+```
 
-| Sprint / Sección | Etapa / Tema | Estado | Enlace al Branch |
-| :---: | :--- | :---: | :---: |
-| **00** | Actividades & Laboratorios Prácticos | ✅ Completado | [Ver Activities](https://github.com/Kurama2416/Desarrollo-Web/tree/Activities) |
-| **01** | Wireframe + Boceto (UI/UX en Figma) | ✅ Completado | [Ver Sprint 1](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_1) |
-| **02** | HTML + CSS (Maquetación y Estilos) | 🔄 En desarrollo | [Ver Sprint 2](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_2) |
-| **03** | Template Engines |  🔄 En desarrollo | [Ver Sprint 3](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_3) |
-| **04** | JSON + Métodos HTTP | ⏳ Pendiente | *Próximamente* |
-| **05** | Middlewares + Auth | ⏳ Pendiente | *Próximamente* |
-| **06** | Bases de Datos | ⏳ Pendiente | *Próximamente* |
-| **07** | Validaciones | ⏳ Pendiente | *Próximamente* |
-| **08** | APIs + React | ⏳ Pendiente | *Próximamente* |
-
----
-
-## 🗺️ Detalle de la Hoja de Ruta
-
-0. **Sprint 00: Actividades & Laboratorios Prácticos (`Activities`)**
-   * Ejercicios de clase, talleres complementarios y prácticas conceptuales (ej. utilidades CLI, manipulación de archivos `fs`, lógica en JavaScript, etc.).
-1. **Sprint 1: Wireframe + Boceto**
-   * Diseños de baja/alta fidelidad y prototipado interactivo del sitio en Figma.
-2. **Sprint 2: HTML + CSS**
-   * Maquetación estática, estilos visuales e interfaz *responsive*.
-3. **Sprint 3: Template Engines**
-   * Dinamización de vistas mediante motores de plantillas.
-4. **Sprint 4: JSON + Métodos HTTP**
-   * Persistencia inicial en archivos JSON y manejo de peticiones HTTP (GET, POST, PUT, DELETE).
-5. **Sprint 5: Middlewares + Auth**
-   * Validación de sesiones, protección de rutas y gestión de usuarios.
-6. **Sprint 6: Bases de Datos**
-   * Integración de base de datos para productos y pedidos.
-7. **Sprint 7: Validaciones**
-   * Control de errores, sanitización de datos y validación de formularios en backend y frontend.
-8. **Sprint 8: APIs + React**
-   * Desacoplamiento de la aplicación, arquitectura API REST y reconstrucción del cliente interactivo en React.
-
----
-
-## 🛠️ Tecnologías del Proyecto
-
-* **Frontend:** HTML5, CSS3, JavaScript, React.js
-* **Backend & Datos:** Node.js, Template Engines, JSON, Bases de Datos
-* **Diseño & UI/UX:** Figma, Wireframe.cc
-* **Control de Versiones:** Git & GitHub
+La estructura de `src/` sigue la del ejemplo entregado por el profesor. El inicio se llama `home.ejs` porque `index.ejs` es el listado de productos.
 
 ---
 
-## 👥 Equipo de Desarrollo
+## 🌐 Rutas
 
-* **Oscar Javier Hernández Morales** - *Sistemas / Desarrollo Web*
-* **Juan David Navarro Jiménez** - *Sistemas / Desarrollo Web*
+### CRUD de productos
+
+| Método | Ruta | Descripción |
+|---|---|---|
+| GET | `/products` | Listado de productos |
+| GET | `/products/create` | Formulario de creación |
+| GET | `/products/:id` | Detalle de un producto |
+| POST | `/products` | Acción de creación |
+| GET | `/products/:id/edit` | Formulario de edición |
+| PUT | `/products/:id` | Acción de edición |
+| DELETE | `/products/:id` | Acción de borrado |
+
+Los navegadores solo envían GET y POST desde un formulario, así que `PUT` y `DELETE` se simulan con el paquete **method-override** (`?_method=PUT` y `?_method=DELETE`).
+
+### Otras páginas
+
+| Método | Ruta | Página |
+|---|---|---|
+| GET | `/` | Inicio |
+| GET | `/carrito` | Carrito de compras |
+| GET / POST | `/registro` | Registro |
+| GET / POST | `/login` | Login |
+
+---
+
+## 🗄️ Datos (JSON)
+
+**`src/database/products.json`**
+
+| Campo | Descripción |
+|---|---|
+| `id` | Identificador único |
+| `name` | Nombre del producto |
+| `description` | Descripción |
+| `image` | Ruta o URL de la imagen |
+| `category` | Granizados, Frutas o Toppings |
+| `sizes` | Tamaños disponibles |
+| `price` | Precio en pesos colombianos |
+
+**`src/database/users.json`:** `id`, `firstName`, `lastName`, `email`, `password`, `category` e `image`. Son datos de ejemplo, generados para probar el sitio.
+
+Los productos que se crean, editan o eliminan se guardan en `products.json`, así que los cambios **se conservan al reiniciar el servidor**.
+
+**Imágenes:** los productos de ejemplo usan imágenes de Unsplash (por URL). Para usar una imagen propia, guarda el archivo en `public/img/` y escribe su ruta en el formulario, por ejemplo `/img/mango.jpg`.
+
+---
+
+## ✅ Validaciones del formulario
+
+Al crear o editar un producto, el servidor revisa los campos y vuelve a mostrar el formulario con los errores marcados, conservando lo que se escribió:
+
+- Nombre de al menos 3 caracteres.
+- Precio numérico mayor que 0.
+- Categoría elegida de la lista.
+- Al menos un tamaño.
+- Descripción de al menos 10 caracteres.
+- Imagen con una ruta que empiece por `/img/` o una URL `http`.
+
+---
+
+## 🎯 Alcance del sprint
+
+**Funciona:**
+- Listado, detalle, creación, edición y eliminación de productos, con persistencia en JSON.
+- Validación de formularios con mensajes de error visibles.
+- Los cambios se reflejan en el inicio y en el listado.
+
+**Sigue siendo maqueta (fuera del alcance de este sprint):**
+- El carrito muestra datos de ejemplo y sus botones no tienen funcionalidad.
+- El registro y el login no guardan ni autentican usuarios.
+- `users.json` solo contiene los datos; todavía no se usa en ninguna pantalla.
+
+---
+
+## 🚀 Cómo ejecutar el proyecto
+
+1. Instalar [Node.js](https://nodejs.org/) (versión 18 o superior).
+2. Instalar las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Iniciar el servidor:
+
+   ```bash
+   npm start
+   ```
+
+   Para desarrollo, con reinicio automático al guardar cambios:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Abrir <http://localhost:3000> en el navegador.
+
+---
+
+## 🧪 Cómo probar el CRUD
+
+1. Entrar a **Productos** desde el menú y ver el listado.
+2. Abrir **Ver detalle** de un producto.
+3. Pulsar **+ Nuevo producto**: enviarlo vacío (se ven los errores) y luego completo.
+4. Pulsar **Editar** en ese producto, cambiar un dato y guardar.
+5. Pulsar **Eliminar** y confirmar el aviso.
+6. Reiniciar el servidor y comprobar que los cambios se conservan.
+
+---
+
+## 📝 Documentación ágil
+
+- [`retro.md`](./retro.md) — Retrospectiva del sprint 3 (estrella de mar).
+- Tablero de trabajo — enlace al inicio de este documento.
+
+---
+
+## 👥 Equipo de desarrollo
+
+- **Oscar Javier Hernández Morales** — Sistemas / Desarrollo Web
+- **Juan David Navarro Jiménez** — Sistemas / Desarrollo Web

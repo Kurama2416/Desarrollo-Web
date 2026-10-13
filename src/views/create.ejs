@@ -1,0 +1,26 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+    <main class="auth-section">
+        <div class="auth-card form-card">
+
+            <nav class="breadcrumb" aria-label="Ruta de navegación">
+                <a href="/">Inicio</a>
+                <span>/</span>
+                <a href="/products">Productos</a>
+                <span>/</span>
+                <span>Nuevo</span>
+            </nav>
+
+            <div class="auth-header">
+                <span class="sub-label">NUEVO PRODUCTO</span>
+                <h1>Crear producto</h1>
+                <p>Completa los datos para agregarlo al catálogo.</p>
+            </div>
+
+            <%- include('partials/product-form', { action: '/products', submitText: 'Crear producto' }) %>
+
+        </div>
+    </main>
+
+<%- include('partials/footer') %>

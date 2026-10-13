@@ -1,0 +1,78 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+    <main class="cart-section">
+        <div class="cart-container">
+
+            <nav class="breadcrumb" aria-label="Ruta de navegación">
+                <a href="/">Inicio</a>
+                <span>/</span>
+                <span>Carrito</span>
+            </nav>
+
+            <div class="section-header cart-header">
+                <span class="sub-label">TU PEDIDO</span>
+                <h1>Carrito de compras</h1>
+            </div>
+
+            <% if (items.length === 0) { %>
+                <div class="cart-empty">
+                    <p>Tu carrito está vacío 🍧</p>
+                    <a href="/products" class="btn btn-primary">Ver los productos</a>
+                </div>
+            <% } else { %>
+                <div class="cart-layout">
+
+                    <div class="cart-items">
+                        <% items.forEach(item => { %>
+                            <article class="cart-item">
+                                <a href="/products/<%= item.product.id %>" class="cart-item-img">
+                                    <img src="<%= item.product.image %>" alt="<%= item.product.name %>">
+                                </a>
+
+                                <div class="cart-item-info">
+                                    <h3><a href="/products/<%= item.product.id %>"><%= item.product.name %></a></h3>
+                                    <p class="cart-item-unit"><%= formatPrice(item.product.price) %> c/u</p>
+
+                                    <div class="cart-qty">
+                                        <button type="button" class="qty-btn" aria-label="Disminuir cantidad">−</button>
+                                        <input type="number" min="1" value="<%= item.quantity %>" aria-label="Cantidad de <%= item.product.name %>">
+                                        <button type="button" class="qty-btn" aria-label="Aumentar cantidad">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="cart-item-side">
+                                    <span class="price"><%= formatPrice(item.subtotal) %></span>
+                                    <button type="button" class="cart-remove">Eliminar</button>
+                                </div>
+                            </article>
+                        <% }) %>
+                    </div>
+
+                    <aside class="cart-summary" aria-label="Resumen del pedido">
+                        <h2>Resumen</h2>
+
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span><%= formatPrice(subtotal) %></span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Envío</span>
+                            <span><%= formatPrice(shipping) %></span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>Total</span>
+                            <span><%= formatPrice(total) %></span>
+                        </div>
+
+                        <button type="button" class="btn btn-primary">Proceder al pago</button>
+                        <a href="/products" class="btn btn-secondary">Seguir comprando</a>
+                    </aside>
+
+                </div>
+            <% } %>
+
+        </div>
+    </main>
+
+<%- include('partials/footer') %>
