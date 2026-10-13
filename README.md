@@ -1,34 +1,91 @@
-# 💻 Sprint 2: Maquetación, Estilos y Lógica Frontend
+# 💻 Sprint 2 — Maquetación con Node.js + Express + EJS
 
-En este segundo sprint se tradujo el prototipo de Figma a código funcional utilizando **HTML5**, **CSS3** y **JavaScript (ES6)**, implementando renderizado dinámico del catálogo de Manglü.
-
----
-
-## 📂 Estructura del Código Fuente
-
-* **`index.html`:** Estructura semántica de la página (Hero, Menú, Historia, Galería, Footer).
-* **`styles.css`:** Estilos visuales, paleta de colores oficial de la marca (amarillos, verdes), tipografía y diseño *responsive* para dispositivos móviles.
-* **`data.js`:** Estructura de datos local que contiene el listado de productos, precios, descripciones y rutas de imágenes.
-* **`main.js`:** Lógica de interacción cliente, manipulación del DOM y renderizado de componentes.
+Sitio web de **Manglü**, granizados artesanales colombianos. En este sprint se armó la estructura y estética del sitio (la maqueta) sobre una aplicación **Node.js + Express** con estructura **MVC** y vistas **EJS**.
 
 ---
 
-## ⚡ Funcionalidades e Interacción (`JavaScript`)
+## 📋 Tablero de trabajo
 
-1. **Carga Dinámica del Menú:** Lectura de los productos alojados en `data.js` y renderizado automático en la interfaz.
-2. **Interactividad:** Manejo de eventos de usuario (clicks en botones de pedido, navegación interna).
-3. **Redirección a Pedidos:** Enrutamiento dinámico hacia WhatsApp con mensajes preformateados según el producto seleccionado.
+🔗 **[PEGAR AQUÍ EL ENLACE A TRELLO O GITHUB PROJECTS]**
 
 ---
 
-## 🚀 Cómo Ejecutar el Proyecto Localmente
+## 📂 Estructura del proyecto
 
-1. Clona la rama o descarga los archivos.
-2. Abre el archivo `index.html` directamente en tu navegador preferido (o utiliza la extensión *Live Server* en VS Code).
+```
+manglu/
+├── app.js                 # Servidor Express
+├── package.json
+├── controllers/
+│   ├── mainController.js  # Home, detalle de producto, carrito
+│   └── authController.js  # Registro y login (maqueta)
+├── routes/
+│   ├── main.js
+│   └── auth.js
+├── data/
+│   ├── products.js        # Productos y textos del sitio
+│   └── cart.js            # Datos de ejemplo del carrito
+├── views/
+│   ├── partials/          # head, header, footer
+│   ├── productos/
+│   │   └── detalle.ejs
+│   ├── index.ejs
+│   ├── carrito.ejs
+│   ├── registro.ejs
+│   └── login.ejs
+├── public/
+│   ├── css/styles.css
+│   ├── js/main.js
+│   └── img/
+├── retro.md
+└── README.md
+```
 
 ---
 
-## 👥 Equipo de Desarrollo
+## 🌐 Páginas y rutas
 
-* **Oscar Javier Hernández Morales** - *Sistemas / Desarrollo Web*
-* **Juan David Navarro Jiménez** - *Sistemas / Desarrollo Web*
+| Página | Ruta |
+|---|---|
+| Home | `/` |
+| Detalle de producto | `/producto/:id` |
+| Carrito de compras | `/carrito` |
+| Registro | `/registro` |
+| Login | `/login` |
+
+---
+
+## 🎯 Alcance del sprint
+
+Este sprint trabaja **la estructura y estética del sitio**. Los formularios y el carrito se muestran como maqueta:
+
+- Los botones del carrito (cantidad, eliminar, proceder al pago) aún no tienen funcionalidad.
+- El login no autentica: muestra un error de ejemplo para visualizar ese estado.
+- El registro muestra los errores de validación, pero no guarda usuarios.
+
+---
+
+## 🚀 Cómo ejecutar el proyecto
+
+1. Instalar [Node.js](https://nodejs.org/) (versión 18 o superior).
+2. Instalar las dependencias:
+
+```bash
+   npm install
+```
+
+3. Abrir <http://localhost:3000> en el navegador.
+
+---
+
+## 📝 Documentación ágil
+
+- [`retro.md`](./retro.md) — Retrospectiva del sprint 1.
+- Tablero de trabajo — enlace al inicio de este documento.
+
+---
+
+## 👥 Equipo de desarrollo
+
+- **Oscar Javier Hernández Morales** — Sistemas / Desarrollo Web
+- **Juan David Navarro Jiménez** — Sistemas / Desarrollo Web
