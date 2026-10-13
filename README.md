@@ -85,13 +85,7 @@ Desarrollo-Web-Sprint_3/
    npm install
 ```
 
-3. Iniciar el servidor:
-
-```bash
-   npm start
-```
-
-4. Abrir <http://localhost:3000> en el navegador.
+3. Abrir <http://localhost:3000> en el navegador.
 
 ---
 
