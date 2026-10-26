@@ -6,7 +6,25 @@ Sitio web de **Manglü**, granizados artesanales colombianos. Aplicación **Node
 
 ## 📋 Tablero de trabajo
 
-🔗 **[PEGAR AQUÍ EL ENLACE A TRELLO O GITHUB PROJECTS]**
+
+## Seguimiento Scrum – Sprint 4
+
+| Issue | Actividad | Responsable | Estado |
+|---|---|---|---|
+| #11 | Revisar pendientes del Sprint 3 | Juan | En revisión |
+| #12 | Implementar persistencia de productos en JSON | Oscar | En revisión |
+| #13 | Implementar GET | Juan | En revisión |
+| #14 | Implementar POST | Oscar | En revisión |
+| #15 | Implementar PUT | Juan | En revisión |
+| #16 | Implementar DELETE | Oscar | En revisión |
+| #17 | Pruebas HTTP y persistencia JSON | Juan y Oscar | Finalizado |
+| #18 | Revisión y corrección de errores | Juan y Oscar | Finalizado |
+| #19 | Documentación técnica y retrospectiva | Oscar | En progreso |
+
+**Tablero Scrum:** [Manglü – Sprint 4](https://github.com/users/juannavarro222/projects/2/views/1)
+
+**Nota:** Los estados reflejan el seguimiento del Sprint 4 y se actualizan en el tablero Scrum de GitHub Projects.
+  
 
 ---
 
