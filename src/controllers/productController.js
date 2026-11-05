@@ -1,93 +1,195 @@
-const fs = require('fs');
-const path = require('path');
 
-// Archivo que hace de base de datos
-const dbPath = path.join(__dirname, '..', 'database', 'products.json');
+const db = require('../../models');
 
-// Opciones que se ofrecen en el formulario
+const { Product, Category, Size, sequelize, Sequelize } = db;
+const { Op } = Sequelize;
+
+// Opciones utilizadas en los formularios
 const categories = ['Granizados', 'Frutas', 'Toppings'];
 const sizeOptions = ['Pequeño', 'Mediano', 'Grande', 'Único'];
 
-// ===== Acceso al archivo JSON =====
-function readProducts() {
-  const raw = fs.readFileSync(dbPath, 'utf-8').trim();
-  return raw ? JSON.parse(raw) : [];
-}
+const formData = { categories, sizeOptions };
 
-function saveProducts(products) {
-  fs.writeFileSync(dbPath, JSON.stringify(products, null, 2) + '\n');
-}
-
-// ===== Datos del formulario =====
-// Convierte lo que llega del formulario en un producto con los tipos correctos
+// Convertir los datos del formulario
 function parseBody(body) {
   return {
     name: String(body.name ?? '').trim(),
     description: String(body.description ?? '').trim(),
     image: String(body.image ?? '').trim(),
     category: String(body.category ?? '').trim(),
-    sizes: [].concat(body.sizes ?? []), // un checkbox llega como texto, varios como arreglo
+    sizes: [...new Set(
+      [].concat(body.sizes ?? []).map(s => String(s))
+    )],
     price: Number(body.price)
   };
 }
 
-// Revisa el producto y devuelve un objeto con los errores encontrados
+// Validar la información del producto
 function validateProduct(product, rawPrice) {
   const errors = {};
 
   if (product.name.length < 3) {
     errors.name = 'El nombre debe tener al menos 3 caracteres.';
   }
-  if (!rawPrice || Number.isNaN(product.price) || product.price <= 0) {
+
+  if (
+    String(rawPrice ?? '').trim() === '' ||
+    !Number.isFinite(product.price) ||
+    product.price <= 0
+  ) {
     errors.price = 'Ingresa un precio válido, mayor que 0.';
   }
+
   if (!categories.includes(product.category)) {
     errors.category = 'Elige una categoría.';
   }
-  if (product.sizes.length === 0 || !product.sizes.every((s) => sizeOptions.includes(s))) {
+
+  if (
+    product.sizes.length === 0 ||
+    !product.sizes.every(s => sizeOptions.includes(s))
+  ) {
     errors.sizes = 'Elige al menos un tamaño.';
   }
+
   if (product.description.length < 10) {
     errors.description = 'La descripción debe tener al menos 10 caracteres.';
   }
+
   if (!/^(\/img\/|https?:\/\/)/.test(product.image)) {
-    errors.image = 'Escribe una ruta como /img/mango.jpg o una URL que empiece con http.';
+    errors.image =
+      'Escribe una ruta como /img/mango.jpg o una URL válida.';
   }
 
   return errors;
 }
 
-// Datos que necesitan las vistas de crear y editar
-const formData = { categories, sizeOptions };
+// Obtener producto con categoría y tamaños
+async function findProduct(id) {
+  const product = await Product.findByPk(id, {
+    include: [
+      { model: Category, as: 'category' },
+      {
+        model: Size,
+        as: 'sizes',
+        through: { attributes: [] }
+      }
+    ]
+  });
+
+  return product ? formatProduct(product) : null;
+}
+
+// Mantener el formato que esperan las vistas EJS
+function formatProduct(product) {
+  const data = product.get({ plain: true });
+
+  return {
+    ...data,
+    category: data.category?.name ?? '',
+    sizes: data.sizes?.map(size => size.name) ?? [],
+    price: Number(data.price)
+  };
+}
+
+// Buscar categoría y tamaños válidos
+async function findRelations(data, transaction) {
+  const category = await Category.findOne({
+    where: { name: data.category },
+    transaction
+  });
+
+  if (!category) {
+    throw new Error('Categoría no encontrada');
+  }
+
+  const sizes = await Size.findAll({
+    where: { name: { [Op.in]: data.sizes } },
+    transaction
+  });
+
+  if (sizes.length !== data.sizes.length) {
+    throw new Error('Uno o más tamaños no existen');
+  }
+
+  return { category, sizes };
+}
 
 const productController = {
-  // GET /products — listado
-  index: (req, res) => {
-    res.render('index', {
-      title: 'Productos | Manglü',
-      products: readProducts()
-    });
-  },
 
-  // GET /products/:id — detalle
-  detail: (req, res) => {
-    const products = readProducts();
-    const product = products.find((p) => p.id === Number(req.params.id));
-    if (!product) {
-      return res.status(404).send('Producto no encontrado');
+  // GET /products
+
+  index: async (req, res) => {
+    try {
+      // Obtener el texto escrito en la búsqueda
+      const search = String(req.query.search ?? '').trim();
+
+      // Filtrar productos por nombre cuando exista una búsqueda
+      const where = search
+        ? { name: { [Op.like]: `%${search}%` } }
+        : {};
+
+      const productsDB = await Product.findAll({
+        where,
+        include: [
+          { model: Category, as: 'category' },
+          {
+            model: Size,
+            as: 'sizes',
+            through: { attributes: [] }
+          }
+        ],
+        order: [['id', 'ASC']]
+      });
+
+      res.render('index', {
+        title: 'Productos | Manglü',
+        products: productsDB.map(formatProduct),
+        search
+      });
+
+    } catch (error) {
+      console.error('Error al buscar productos:', error);
+      res.status(500).send('Error al cargar los productos');
     }
-
-    // Otros 3 productos para la sección "También te puede gustar"
-    const related = products.filter((p) => p.id !== product.id).slice(0, 3);
-
-    res.render('detail', {
-      title: `${product.name} | Manglü`,
-      product,
-      related
-    });
   },
 
-  // GET /products/create — formulario vacío
+
+  // GET /products/:id
+  detail: async (req, res) => {
+    try {
+      const product = await findProduct(req.params.id);
+
+      if (!product) {
+        return res.status(404).send('Producto no encontrado');
+      }
+
+      const relatedDB = await Product.findAll({
+        where: { id: { [Op.ne]: product.id } },
+        include: [
+          { model: Category, as: 'category' },
+          {
+            model: Size,
+            as: 'sizes',
+            through: { attributes: [] }
+          }
+        ],
+        order: [['id', 'ASC']],
+        limit: 3
+      });
+
+      res.render('detail', {
+        title: `${product.name} | Manglü`,
+        product,
+        related: relatedDB.map(formatProduct)
+      });
+
+    } catch (error) {
+      console.error('Error al mostrar producto:', error);
+      res.status(500).send('Error al cargar el producto');
+    }
+  },
+
+  // GET /products/create
   createForm: (req, res) => {
     res.render('create', {
       title: 'Nuevo producto | Manglü',
@@ -97,83 +199,131 @@ const productController = {
     });
   },
 
-  // POST /products — guardar producto nuevo
-  store: (req, res) => {
-    const newProduct = parseBody(req.body);
-    const errors = validateProduct(newProduct, req.body.price);
+  // POST /products
+  store: async (req, res) => {
+    const data = parseBody(req.body);
+    const errors = validateProduct(data, req.body.price);
 
     if (Object.keys(errors).length > 0) {
       return res.status(400).render('create', {
         title: 'Nuevo producto | Manglü',
         ...formData,
         errors,
-        old: { ...newProduct, price: req.body.price ?? '' }
+        old: { ...data, price: req.body.price ?? '' }
       });
     }
 
-    const products = readProducts();
-    // Id nuevo = el mayor existente + 1 (no se repite aunque se elimine alguno)
-    const id = products.reduce((max, p) => Math.max(max, p.id), 0) + 1;
-    products.push({ id, ...newProduct });
-    saveProducts(products);
+    try {
+      await sequelize.transaction(async transaction => {
+        const { category, sizes } =
+          await findRelations(data, transaction);
 
-    res.redirect('/products');
+        const product = await Product.create({
+          name: data.name,
+          description: data.description,
+          image: data.image,
+          price: data.price,
+          category_id: category.id
+        }, { transaction });
+
+        await product.addSizes(sizes, { transaction });
+      });
+
+      res.redirect('/products');
+
+    } catch (error) {
+      console.error('Error al crear producto:', error);
+      res.status(500).send('Error al guardar el producto');
+    }
   },
 
-  // GET /products/:id/edit — formulario con los datos actuales
-  editForm: (req, res) => {
-    const product = readProducts().find((p) => p.id === Number(req.params.id));
-    if (!product) {
-      return res.status(404).send('Producto no encontrado');
-    }
+  // GET /products/:id/edit
+  editForm: async (req, res) => {
+    try {
+      const product = await findProduct(req.params.id);
 
-    res.render('edit', {
-      title: `Editar ${product.name} | Manglü`,
-      ...formData,
-      product,
-      errors: {},
-      old: product
-    });
-  },
+      if (!product) {
+        return res.status(404).send('Producto no encontrado');
+      }
 
-  // PUT /products/:id — guardar cambios
-  update: (req, res) => {
-    const products = readProducts();
-    const index = products.findIndex((p) => p.id === Number(req.params.id));
-    if (index === -1) {
-      return res.status(404).send('Producto no encontrado');
-    }
-
-    const changes = parseBody(req.body);
-    const errors = validateProduct(changes, req.body.price);
-
-    if (Object.keys(errors).length > 0) {
-      return res.status(400).render('edit', {
-        title: `Editar ${products[index].name} | Manglü`,
+      res.render('edit', {
+        title: `Editar ${product.name} | Manglü`,
         ...formData,
-        product: products[index],
-        errors,
-        old: { ...changes, price: req.body.price ?? '' }
+        product,
+        errors: {},
+        old: product
       });
+
+    } catch (error) {
+      console.error('Error al abrir edición:', error);
+      res.status(500).send('Error al cargar el formulario');
     }
-
-    // Se conserva el id y se reemplazan los demás campos
-    products[index] = { id: products[index].id, ...changes };
-    saveProducts(products);
-
-    res.redirect('/products');
   },
 
-  // DELETE /products/:id — eliminar
-  destroy: (req, res) => {
-    const products = readProducts();
-    const exists = products.some((p) => p.id === Number(req.params.id));
-    if (!exists) {
-      return res.status(404).send('Producto no encontrado');
-    }
+  // PUT /products/:id
+  update: async (req, res) => {
+    try {
+      const product = await Product.findByPk(req.params.id);
 
-    saveProducts(products.filter((p) => p.id !== Number(req.params.id)));
-    res.redirect('/products');
+      if (!product) {
+        return res.status(404).send('Producto no encontrado');
+      }
+
+      const data = parseBody(req.body);
+      const errors = validateProduct(data, req.body.price);
+
+      if (Object.keys(errors).length > 0) {
+        return res.status(400).render('edit', {
+          title: `Editar ${product.name} | Manglü`,
+          ...formData,
+          product: await findProduct(product.id),
+          errors,
+          old: { ...data, price: req.body.price ?? '' }
+        });
+      }
+
+      await sequelize.transaction(async transaction => {
+        const { category, sizes } =
+          await findRelations(data, transaction);
+
+        await product.update({
+          name: data.name,
+          description: data.description,
+          image: data.image,
+          price: data.price,
+          category_id: category.id
+        }, { transaction });
+
+        await product.setSizes(sizes, { transaction });
+      });
+
+      res.redirect('/products');
+
+    } catch (error) {
+      console.error('Error al actualizar producto:', error);
+      res.status(500).send('Error al actualizar el producto');
+    }
+  },
+
+  // DELETE /products/:id
+  destroy: async (req, res) => {
+    try {
+      const product = await Product.findByPk(req.params.id);
+
+      if (!product) {
+        return res.status(404).send('Producto no encontrado');
+      }
+
+      await product.destroy();
+
+      res.redirect('/products');
+
+    } catch (error) {
+      console.error('Error al eliminar producto:', error);
+      res.status(500).send(
+        'No se pudo eliminar el producto. Puede estar asociado a un carrito.'
+      );
+    }
   }
 };
 

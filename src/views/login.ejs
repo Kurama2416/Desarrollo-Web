@@ -10,6 +10,12 @@
                 <p>Ingresa para ver tu historial de compras.</p>
             </div>
 
+            <% if (registered) { %>
+                <div class="form-success" role="status">
+                    ¡Cuenta creada! Ya puedes iniciar sesión.
+                </div>
+            <% } %>
+
             <% if (errors.general) { %>
                 <div class="form-alert" role="alert">
                     <%= errors.general %>
@@ -19,9 +25,9 @@
             <form action="/login" method="POST" class="auth-form" novalidate>
 
                 <div class="form-group <%= errors.general ? 'has-error' : '' %>">
-                    <label for="correo">Correo electrónico</label>
-                    <input type="email" id="correo" name="correo"
-                           value="<%= old.correo || '' %>"
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email"
+                           value="<%= old.email || '' %>"
                            placeholder="nombre@correo.com" autocomplete="email"
                            aria-invalid="<%= errors.general ? 'true' : 'false' %>">
                 </div>
@@ -34,8 +40,8 @@
                 </div>
 
                 <div class="form-group form-check">
-                    <label for="recordarme">
-                        <input type="checkbox" id="recordarme" name="recordarme" value="si">
+                    <label for="remember">
+                        <input type="checkbox" id="remember" name="remember" value="si">
                         Recordarme en este dispositivo
                     </label>
                 </div>

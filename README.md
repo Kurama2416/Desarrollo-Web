@@ -1,186 +1,265 @@
-# 💻 Sprint 4 — CRUD de productos con Node.js + Express + EJS
+# 🥭 Manglü — Sprint 6: Base de datos y Sequelize
 
-Sitio web de **Manglü**, granizados artesanales colombianos. Aplicación **Node.js + Express** con vistas **EJS** y los datos guardados en archivos **JSON**. En este sprint se implementó la administración completa de productos: listado, detalle, creación, edición y eliminación.
+Manglü es una aplicación web dedicada a la venta de granizados artesanales colombianos, desarrollada con **Node.js, Express y EJS**.
 
----
+En el Sprint 6 se incorporó **MySQL como sistema de gestión de bases de datos** y **Sequelize como ORM**, permitiendo almacenar y administrar productos, usuarios, categorías, tamaños y carritos de compra de manera persistente.
 
 ## 📋 Tablero de trabajo
 
+**Enlace:** [https://trello.com/invite/b/6aece6423bc5d9f074bd4651/ATTI8e2f0441fe128d6e03157640dc631f8e76B9FEC8/manglu-sprint-6-base-de-datos-y-sequelize]
 
-## Seguimiento Scrum – Sprint 4
+## ✨ Funcionalidades del proyecto
 
-| Issue | Actividad | Responsable | Estado |
-|---|---|---|---|
-| #11 | Revisar pendientes del Sprint 3 | Juan | En revisión |
-| #12 | Implementar persistencia de productos en JSON | Oscar | En revisión |
-| #13 | Implementar GET | Juan | En revisión |
-| #14 | Implementar POST | Oscar | En revisión |
-| #15 | Implementar PUT | Juan | En revisión |
-| #16 | Implementar DELETE | Oscar | En revisión |
-| #17 | Pruebas HTTP y persistencia JSON | Juan y Oscar | Finalizado |
-| #18 | Revisión y corrección de errores | Juan y Oscar | Finalizado |
-| #19 | Documentación técnica y retrospectiva | Oscar | En progreso |
+### Funcionalidades desarrolladas en sprints anteriores
 
-**Tablero Scrum:** [Manglü – Sprint 4](https://github.com/users/juannavarro222/projects/2/views/1)
+- Catálogo de productos y páginas de detalle.
+- Creación, edición y eliminación de productos.
+- Registro e inicio de sesión de usuarios.
+- Cierre de sesión y perfil de usuario.
+- Contraseñas cifradas mediante bcryptjs.
+- Subida de imágenes con Multer.
+- Middlewares de autenticación y control de acceso.
+- Interfaz desarrollada con EJS, HTML, CSS y JavaScript.
 
-**Nota:** Los estados reflejan el seguimiento del Sprint 4 y se actualizan en el tablero Scrum de GitHub Projects.
-  
+### Funcionalidades implementadas en el Sprint 6
 
----
+- Conexión de la aplicación con MySQL.
+- Configuración de Sequelize.
+- Creación de modelos y asociaciones.
+- Migración del almacenamiento principal de productos y usuarios a la base de datos.
+- Implementación del CRUD administrativo de usuarios.
+- Persistencia de carritos y artículos.
+- Creación de migraciones para reconstruir la estructura de la base de datos.
+- Creación de seeders con información inicial del catálogo.
+- Verificación de las migraciones y seeders en una base de datos de prueba.
+- Elaboración del diagrama entidad-relación.
 
-## 📂 Estructura del proyecto
+## 🛠️ Tecnologías utilizadas
 
-```
-Desarrollo-Web-Sprint_4/
+| Tecnología | Función |
+|---|---|
+| Node.js | Entorno de ejecución |
+| Express | Framework del servidor |
+| EJS | Motor de plantillas |
+| MySQL | Base de datos relacional |
+| Sequelize | ORM y gestión de modelos |
+| Sequelize CLI | Ejecución de migraciones y seeders |
+| bcryptjs | Cifrado de contraseñas |
+| Multer | Subida de imágenes |
+| express-session | Gestión de sesiones |
+| dotenv | Variables de entorno |
+| Git y GitHub | Control de versiones |
+
+## 🗄️ Modelo de base de datos
+
+La base de datos está compuesta por siete tablas principales:
+
+| Tabla | Descripción |
+|---|---|
+| `users` | Información de los usuarios y sus roles |
+| `categories` | Categorías del catálogo |
+| `sizes` | Tamaños disponibles |
+| `products` | Productos de Manglü |
+| `product_sizes` | Relación entre productos y tamaños |
+| `carts` | Carritos asociados a usuarios |
+| `cart_items` | Artículos almacenados en cada carrito |
+
+### Relaciones principales
+
+- Una categoría puede contener varios productos.
+- Un producto puede estar disponible en varios tamaños.
+- Un tamaño puede asociarse a varios productos.
+- Un usuario puede tener varios carritos.
+- Un carrito puede contener varios artículos.
+- Cada artículo del carrito está relacionado con un producto y un tamaño.
+
+### Diagrama entidad-relación (DER)
+
+![Diagrama entidad-relación de Manglü](./docs/DER_Manglu.png)
+
+El modelo editable de MySQL Workbench se encuentra en `docs/Manglu_Modelo_ER.mwb`.
+
+## 📂 Estructura principal del proyecto
+
+```text
+Desarrollo-Web-Sprint_6/
+├── config/
+│   └── config.js
+├── docs/
+│   ├── DER_Manglu.png
+│   └── Manglu_Modelo_ER.mwb
+├── migrations/
+│   ├── 20261105000100-create-users.js
+│   ├── 20261105000200-create-categories.js
+│   └── 20261105000300-create-remaining-tables.js
+├── models/
+├── seeders/
+│   └── 20261105000400-demo-data.js
+├── public/
+├── src/
+│   ├── controllers/
+│   ├── middlewares/
+│   ├── routes/
+│   ├── views/
+│   └── index.js
+├── .env
 ├── .gitignore
+├── .sequelizerc
 ├── package.json
 ├── README.md
-├── retro.md
-├── public/
-│   ├── css/styles.css
-│   └── js/main.js
-└── src/
-    ├── index.js                      # Servidor Express
-    ├── controllers/
-    │   ├── mainController.js         # Inicio y carrito
-    │   ├── authController.js         # Registro y login (maqueta)
-    │   └── productController.js      # CRUD de productos
-    ├── database/
-    │   ├── products.json             # Datos de productos
-    │   ├── users.json                # Datos de usuarios
-    │   ├── site.json                 # Textos del sitio (menú, portada, galería...)
-    │   └── cart.json                 # Carrito de ejemplo
-    ├── middlewares/
-    │   ├── logger.js                 # Registra cada petición en consola
-    │   └── locals.js                 # Deja datos y funciones disponibles en las vistas
-    ├── routes/
-    │   ├── main.routes.js
-    │   ├── auth.routes.js
-    │   └── products.routes.js
-    └── views/
-        ├── partials/                 # head, header, footer, product-form
-        ├── home.ejs                  # Inicio
-        ├── index.ejs                 # Listado de productos
-        ├── detail.ejs                # Detalle de producto
-        ├── create.ejs                # Formulario de creación
-        ├── edit.ejs                  # Formulario de edición
-        ├── carrito.ejs
-        ├── registro.ejs
-        └── login.ejs
+└── retro.md
 ```
 
-La estructura de `src/` sigue la del ejemplo entregado por el profesor. El inicio se llama `home.ejs` porque `index.ejs` es el listado de productos.
+**Nota:** el archivo `.env` es local y no debe subirse al repositorio.
 
----
+## 🌐 Funcionalidades y rutas
 
-## 🌐 Rutas
-
-### CRUD de productos
-
-| Método | Ruta | Descripción |
-|---|---|---|
-| GET | `/products` | Listado de productos |
-| GET | `/products/create` | Formulario de creación |
-| GET | `/products/:id` | Detalle de un producto |
-| POST | `/products` | Acción de creación |
-| GET | `/products/:id/edit` | Formulario de edición |
-| PUT | `/products/:id` | Acción de edición |
-| DELETE | `/products/:id` | Acción de borrado |
-
-Los navegadores solo envían GET y POST desde un formulario, así que `PUT` y `DELETE` se simulan con el paquete **method-override** (`?_method=PUT` y `?_method=DELETE`).
-
-### Otras páginas
-
-| Método | Ruta | Página |
-|---|---|---|
-| GET | `/` | Inicio |
-| GET | `/carrito` | Carrito de compras |
-| GET / POST | `/registro` | Registro |
-| GET / POST | `/login` | Login |
-
----
-
-## 🗄️ Datos (JSON)
-
-**`src/database/products.json`**
-
-| Campo | Descripción |
+| Ruta | Función |
 |---|---|
-| `id` | Identificador único |
-| `name` | Nombre del producto |
-| `description` | Descripción |
-| `image` | Ruta o URL de la imagen |
-| `category` | Granizados, Frutas o Toppings |
-| `sizes` | Tamaños disponibles |
-| `price` | Precio en pesos colombianos |
+| `/` | Página principal |
+| `/products` | Catálogo de productos |
+| `/products/:id` | Detalle de producto |
+| `/registro` | Registro de usuarios |
+| `/login` | Inicio de sesión |
+| `/perfil` | Perfil del usuario |
+| `/carrito` | Carrito de compras |
+| `/admin/users` | Administración de usuarios |
 
-**`src/database/users.json`:** `id`, `firstName`, `lastName`, `email`, `password`, `category` e `image`. Son datos de ejemplo, generados para probar el sitio.
+El sistema incluye operaciones para crear, consultar, actualizar y eliminar productos y usuarios, sujetas a los permisos establecidos en las rutas correspondientes.
 
-Los productos que se crean, editan o eliminan se guardan en `products.json`, así que los cambios **se conservan al reiniciar el servidor**.
+## 🚀 Instalación y ejecución
 
-**Imágenes:** los productos de ejemplo usan imágenes de Unsplash (por URL). Para usar una imagen propia, guarda el archivo en `public/img/` y escribe su ruta en el formulario, por ejemplo `/img/mango.jpg`.
+### 1. Requisitos
 
----
+- Node.js y npm.
+- MySQL Server.
+- MySQL Workbench (recomendado).
+- Git.
 
-## ✅ Validaciones del formulario
+### 2. Clonar el repositorio
 
-Al crear o editar un producto, el servidor revisa los campos y vuelve a mostrar el formulario con los errores marcados, conservando lo que se escribió:
+```bash
+git clone URL_DEL_REPOSITORIO
+cd Desarrollo-Web-Sprint_6
+```
 
-- Nombre de al menos 3 caracteres.
-- Precio numérico mayor que 0.
-- Categoría elegida de la lista.
-- Al menos un tamaño.
-- Descripción de al menos 10 caracteres.
-- Imagen con una ruta que empiece por `/img/` o una URL `http`.
+Reemplazar `URL_DEL_REPOSITORIO` por el enlace real de GitHub.
 
----
+### 3. Instalar dependencias
 
-## 🎯 Alcance del sprint
+```bash
+npm install
+```
 
-**Funciona:**
-- Listado, detalle, creación, edición y eliminación de productos, con persistencia en JSON.
-- Validación de formularios con mensajes de error visibles.
-- Los cambios se reflejan en el inicio y en el listado.
+### 4. Configurar las variables de entorno
 
-**Sigue siendo maqueta (fuera del alcance de este sprint):**
-- El carrito muestra datos de ejemplo y sus botones no tienen funcionalidad.
-- El registro y el login no guardan ni autentican usuarios.
-- `users.json` solo contiene los datos; todavía no se usa en ninguna pantalla.
+Crear un archivo `.env` en la raíz del proyecto y configurar las variables necesarias:
 
----
+```env
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=manglu_db
+DB_USER=usuario_mysql
+DB_PASSWORD=contraseña_mysql
+SESSION_SECRET=clave_privada_de_sesion
+```
 
-## 🚀 Cómo ejecutar el proyecto
+Los valores deben corresponder a la instalación local de MySQL.
 
-1. Instalar [Node.js](https://nodejs.org/) (versión 18 o superior).
-2. Instalar las dependencias:
+**Importante:** nunca publicar contraseñas reales ni el archivo `.env` en GitHub.
 
-   ```bash
-   npm install
-   ```
-   
-3. Abrir <http://localhost:3000> en el navegador.
+### 5. Crear la base de datos
 
----
+Desde MySQL Workbench:
 
-## 🧪 Cómo probar el CRUD
+```sql
+CREATE DATABASE IF NOT EXISTS manglu_db;
+```
 
-1. Entrar a **Productos** desde el menú y ver el listado.
-2. Abrir **Ver detalle** de un producto.
-3. Pulsar **+ Nuevo producto**: enviarlo vacío (se ven los errores) y luego completo.
-4. Pulsar **Editar** en ese producto, cambiar un dato y guardar.
-5. Pulsar **Eliminar** y confirmar el aviso.
-6. Reiniciar el servidor y comprobar que los cambios se conservan.
+El usuario de MySQL configurado debe tener permisos suficientes sobre esta base de datos.
 
----
+### 6. Ejecutar las migraciones
+
+Para una base de datos nueva y vacía, ejecutar:
+
+```bash
+npx sequelize-cli db:migrate --env development
+```
+
+Las migraciones crean las siete tablas y sus relaciones.
+
+**Advertencia:** no ejecutar las migraciones de creación sobre una base de datos que ya tenga las tablas creadas manualmente sin revisar primero su estado.
+
+### 7. Ejecutar los seeders
+
+Para cargar el catálogo inicial en una base de datos nueva:
+
+```bash
+npx sequelize-cli db:seed:all --env development
+```
+
+El seeder incluye:
+
+| Datos iniciales | Cantidad |
+|---|---:|
+| Categorías | 3 |
+| Tamaños | 4 |
+| Productos | 9 |
+| Relaciones producto-tamaño | 24 |
+| **Total** | **40** |
+
+Estos datos corresponden al catálogo inicial. No incluyen cuentas de usuario ni carritos personales.
+
+### 8. Iniciar el servidor
+
+```bash
+npm start
+```
+
+Abrir en el navegador:
+
+http://localhost:3000
+
+## 🧪 Pruebas realizadas
+
+Se utilizó una base de datos independiente llamada `manglu_test` para comprobar el funcionamiento de las migraciones y seeders.
+
+Se verificó:
+
+- Creación de las siete tablas mediante migraciones.
+- Creación de las relaciones y claves foráneas.
+- Inserción de los 40 registros iniciales.
+- Consulta de los registros desde MySQL Workbench.
+- Funcionamiento del CRUD de productos.
+- Funcionamiento del CRUD administrativo de usuarios.
+- Persistencia del carrito de compras.
+- Conservación de los datos tras reiniciar el servidor.
+
+La base de datos principal `manglu_db` se mantuvo separada de las pruebas.
+
+## 🔒 Seguridad
+
+- Las contraseñas de usuarios se almacenan cifradas.
+- Se utilizan sesiones para la autenticación.
+- Las rutas protegidas requieren iniciar sesión.
+- Las funcionalidades administrativas están restringidas según el rol.
+- Las credenciales de la base de datos se configuran mediante variables de entorno.
+- El archivo `.env` debe excluirse del repositorio mediante `.gitignore`.
 
 ## 📝 Documentación ágil
 
-- [`retro.md`](./retro.md) — Retrospectiva del sprint 3 (estrella de mar).
-- Tablero de trabajo — enlace al inicio de este documento.
-
----
+- `retro.md`: retrospectiva del proyecto.
+- `docs/DER_Manglu.png`: diagrama entidad-relación.
+- `docs/Manglu_Modelo_ER.mwb`: modelo editable de la base de datos.
+- Tablero de trabajo: pendiente de agregar el enlace.
 
 ## 👥 Equipo de desarrollo
 
 - **Oscar Javier Hernández Morales** — Sistemas / Desarrollo Web
 - **Juan David Navarro Jiménez** — Sistemas / Desarrollo Web
+
+## 🎯 Conclusión del Sprint 6
+
+Durante este sprint se fortaleció la arquitectura de Manglü mediante la implementación de una base de datos relacional con MySQL y Sequelize. Esto permitió reemplazar el almacenamiento principal basado en archivos JSON por un sistema persistente, organizar las relaciones entre las entidades y mejorar la administración de usuarios, productos y carritos.
+
+Adicionalmente, las migraciones y seeders permiten reproducir la estructura y los datos iniciales del catálogo en una nueva base de datos, facilitando las pruebas, el mantenimiento y la continuidad del desarrollo.

@@ -1,37 +1,57 @@
-# Retrospectiva Sprint 3 – Manglü
+# Retrospectiva Sprint 5 – Manglü
 
-## Retrospectiva Starfish
-
-### ⭐ Continuar haciendo
-
-* Separar el código en modelo, controlador, rutas y vistas, y construir cada parte en pasos pequeños.
-* Reutilizar un solo formulario para crear y editar productos, en lugar de duplicarlo.
-* Validar los datos en el servidor y mostrar los errores en el formulario, conservando lo que la persona había escrito.
-* Mantener el diseño de Manglü con las variables de CSS, para que las páginas nuevas se vean igual que las anteriores.
-
-### 🛑 Dejar de hacer
-
-* Guardar los productos solo en memoria: los que se creaban o editaban se perdían al reiniciar el servidor.
-* Repetir las mismas funciones auxiliares en varios controladores (por ejemplo, el formato del precio).
-* Mezclar nombres en español e inglés para el mismo recurso: el listado estaba en `/productos` y el detalle en `/producto/:id`, dos familias de rutas para lo mismo.
+## Retrospectiva Starfish ⭐
 
 ### ➕ Comenzar a hacer
 
-* Leer completa la consigna y confirmar rutas, campos y estructura de carpetas antes de escribir código.
-* Ejecutar `npm start` después de cada cambio importante, no solo al final.
-* Actualizar la documentación (`retro.md`, `README.md` y el tablero) durante el sprint y no dejarla para el último momento.
-* Hacer commits más frecuentes, para poder volver atrás si algo se rompe.
+- Realizar pruebas de registro e inicio de sesión con diferentes datos para identificar posibles errores.
+- Revisar los permisos de acceso a las rutas antes de dar por terminada cada funcionalidad.
+- Documentar los cambios realizados durante el desarrollo y mantener actualizado el tablero de trabajo.
+- Planificar la transición de archivos JSON a una base de datos relacional para mejorar el almacenamiento de la información.
 
 ### 🔄 Hacer más
 
-* Probar el flujo completo en el navegador (listar, crear y editar) y no solo revisar que el código se vea bien.
-* Aprovechar lo que ya está hecho en un sprint para adelantar el siguiente.
+- Probar los formularios de registro e inicio de sesión, incluyendo campos vacíos, correos repetidos y contraseñas incorrectas.
+- Verificar el funcionamiento de las sesiones y las redirecciones de usuarios autenticados y no autenticados.
+- Revisar las validaciones de imágenes para evitar archivos con formatos o tamaños no permitidos.
+- Organizar mejor el código mediante controladores, rutas y middlewares para facilitar su mantenimiento.
+
+### ⭐ Continuar haciendo
+
+- Trabajar de manera organizada, desarrollando y comprobando una funcionalidad a la vez.
+- Utilizar bcryptjs para proteger las contraseñas de los usuarios.
+- Mantener la separación entre rutas, controladores, modelos y vistas.
+- Conservar las funcionalidades de los sprints anteriores mientras se incorporan nuevas características.
+- Realizar pruebas en el navegador para verificar que las funcionalidades respondan correctamente.
 
 ### 🔽 Hacer menos
 
-* Acumular todo el CSS en un solo archivo cada vez más largo: ya supera las 1.200 líneas y conviene dividirlo por secciones.
-* Dejar decisiones de estructura para el final, cuando cambiarlas obliga a mover muchos archivos.
+- Depender de archivos JSON para almacenar información de usuarios y productos.
+- Realizar cambios en varias partes del proyecto sin comprobar primero su funcionamiento.
+- Dejar la documentación del README y la retrospectiva para el final.
+- Repetir código que puede organizarse mediante middlewares y funciones reutilizables.
+
+### 🛑 Dejar de hacer
+
+- Permitir el acceso a páginas privadas sin verificar que el usuario haya iniciado sesión.
+- Guardar contraseñas sin cifrado o incluir información sensible en el repositorio.
+- Dar por terminada una funcionalidad sin comprobar los casos en los que el usuario ingresa información incorrecta.
+- Depender únicamente de archivos JSON como solución de almacenamiento a largo plazo.
+
+## Dificultades y aprendizajes
+
+Durante el Sprint 5, uno de los principales retos fue implementar el sistema de autenticación de usuarios, incluyendo el registro, inicio de sesión, cierre de sesión y acceso al perfil.
+
+También fue necesario organizar los middlewares para controlar el acceso a las diferentes rutas, diferenciando entre usuarios que habían iniciado sesión y visitantes. Esto permitió comprender mejor la importancia de la seguridad y la organización del código.
+
+Otro aprendizaje importante fue la implementación del cifrado de contraseñas y la subida de fotografías de perfil, ya que estas funcionalidades requieren validaciones para proteger la información de los usuarios.
+
+Finalmente, se identificó que el almacenamiento mediante archivos JSON, aunque fue útil durante los primeros sprints, presentaba limitaciones para continuar ampliando el proyecto. Por esta razón, se planteó como mejora para el Sprint 6 la implementación de una base de datos SQL mediante Sequelize.
 
 ## Conclusión
 
-En el sprint 3 se agregó la gestión de productos: listado, formulario de carga y formulario de edición, con validación en el servidor y una estructura con modelo, controlador y rutas. La principal limitación fue que los datos vivían en memoria y se perdían al reiniciar. Para el sprint 4 nos llevamos tres tareas claras: guardar los productos en archivos JSON, agregar la eliminación y ordenar el proyecto según la estructura de carpetas pedida, con rutas unificadas en `/products`.
+En el Sprint 5 se fortaleció Manglü mediante la implementación del sistema de usuarios, incorporando registro, inicio de sesión, cierre de sesión, perfil y control de acceso mediante middlewares.
+
+Este sprint permitió comprender la importancia de proteger la información de los usuarios, validar los formularios y organizar correctamente las funcionalidades del servidor.
+
+Como principal oportunidad de mejora, se identificó la necesidad de migrar el almacenamiento basado en archivos JSON a una base de datos relacional, con el propósito de facilitar la administración de la información y continuar desarrollando nuevas funcionalidades en el Sprint 6.

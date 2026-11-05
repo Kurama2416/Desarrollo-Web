@@ -1419,3 +1419,238 @@ img {
     padding: 0.6rem 0.8rem;
 }
 
+/* ===== Sprint 5: foto de perfil ===== */
+.form-group input[type="file"] {
+    padding: 0.7rem 1rem;
+    border: 1.5px dashed var(--dark-green);
+    border-radius: 1.2rem;
+    background-color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--dark-green);
+}
+
+.form-group.has-error input[type="file"] {
+    border-color: #991B1B;
+    background-color: #FEF2F2;
+}
+
+/* ===== Sprint 5: usuario en el header y aviso de éxito ===== */
+.nav-avatar {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.4rem;
+    vertical-align: middle;
+}
+
+.nav-menu form {
+    display: inline;
+}
+
+.nav-logout {
+    display: inline-block;
+    font-family: var(--font-body);
+    background: transparent;
+    color: var(--dark-green);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--dark-green);
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.nav-logout:hover {
+    background-color: var(--dark-green);
+    color: var(--bg-yellow);
+}
+
+.form-success {
+    background-color: #D1FAE5;
+    color: #065F46;
+    border-radius: 1rem;
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* ===== Sprint 5: perfil ===== */
+.profile-card {
+    text-align: center;
+}
+
+.profile-card .breadcrumb {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.profile-top {
+    margin-bottom: 1.6rem;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    border: 3px solid var(--bg-yellow);
+}
+
+.profile-top h1 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--dark-green);
+}
+
+.profile-role {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.3rem 1rem;
+    border-radius: 999px;
+    background-color: var(--dark-green);
+    color: var(--bg-yellow);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.profile-data {
+    text-align: left;
+    margin-bottom: 1.6rem;
+}
+
+.profile-data div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(14, 41, 18, 0.12);
+}
+
+.profile-data dt {
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.profile-data dd {
+    font-weight: 600;
+    color: var(--dark-green);
+    text-align: right;
+    word-break: break-word;
+}
+
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.profile-actions form {
+    display: flex;
+}
+
+.profile-actions form .btn {
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .profile-actions {
+        flex-direction: row;
+    }
+
+    .profile-actions > .btn,
+    .profile-actions form {
+        flex: 1;
+    }
+}
+
+/* =====================================
+   BUSCADOR DE PRODUCTOS - SPRINT 6
+===================================== */
+
+.product-search {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 220px;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+    background-color: #fff;
+    transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+    outline: 2px solid #79b86a;
+    outline-offset: 2px;
+}
+
+.product-search .btn {
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .product-search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-input {
+        width: 100%;
+        flex: auto;
+        min-width: 0;
+    }
+
+    .product-search .btn {
+        text-align: center;
+    }
+}
+
+/* =====================================
+   DETALLE DE USUARIOS - SPRINT 6
+===================================== */
+
+.user-detail-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 30px;
+    margin: 24px 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.user-detail-card h2 {
+    margin-bottom: 24px;
+}
+
+.user-detail-info {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.user-detail-info p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.user-detail-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
