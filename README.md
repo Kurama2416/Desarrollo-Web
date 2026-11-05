@@ -75,7 +75,7 @@ La base de datos está compuesta por siete tablas principales:
 
 ### Diagrama entidad-relación (DER)
 
-![Diagrama entidad-relación de Manglü](./docs/DER_Manglu.png)
+![Diagrama entidad-relación de Manglü](Lo encontraras en la carpeta de Docs)
 
 El modelo editable de MySQL Workbench se encuentra en `docs/Manglu_Modelo_ER.mwb`.
 
