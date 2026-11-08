@@ -1,71 +1,193 @@
-# 🥭 Manglü - Sitio Web Oficial & Plataforma de Pedidos
+# 💻 Sprint 5 — Usuarios, sesiones y middlewares
 
-Plataforma web desarrollada para **Manglü**, negocio especializado en granizados, toppings y bebidas artesanales a base de frutas tropicales ubicado en San Gil (Centro Comercial San Gil Plaza, Local 218).
-
-El objetivo del proyecto es digitalizar la presencia del comercio, presentar su catálogo interactivo de productos y construir una arquitectura escalable lista para producción.
+Sitio web de **Manglü**, granizados artesanales colombianos. Aplicación **Node.js + Express** con vistas **EJS** y datos en archivos **JSON**. En este sprint se agregaron los usuarios: registro con foto de perfil, login, logout, perfil, y rutas separadas para huéspedes y para usuarios con sesión.
 
 ---
 
-## 🎯 Objetivo del Proyecto
+## 📋 Tablero de trabajo
 
-Transformar la presencia digital de Manglü mediante una aplicación web funcional que permita:
-* **Exhibir el menú interactivo:** Catálogo visual con precios, productos estrella (Manglü, Granizado de Lulo, Maracuyá, Tamarindo, etc.) e ingredientes.
-* **Procesar pedidos a domicilio:** Enrutamiento de pedidos directamente hacia WhatsApp sin intermediarios.
-* **Escalabilidad técnica:** Implementación progresiva de arquitectura backend, persistencia de datos, autenticación y frontend moderno con React.
+🔗 **[PEGAR AQUÍ EL ENLACE A TRELLO O GITHUB PROJECTS]**
 
 ---
 
-## 📂 Navegación por Sprints y Actividades (Ramas)
+## ✨ Qué se agregó en este sprint
 
-Haz clic en cualquier sprint o sección para ir directamente al código y la documentación correspondiente de esa etapa:
-
-| Sprint / Sección | Etapa / Tema | Estado | Enlace al Branch |
-| :---: | :--- | :---: | :---: |
-| **00** | Actividades & Laboratorios Prácticos | ✅ Completado | [Ver Activities](https://github.com/Kurama2416/Desarrollo-Web/tree/Activities) |
-| **01** | Wireframe + Boceto (UI/UX en Figma) | ✅ Completado | [Ver Sprint 1](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_1) |
-| **02** | HTML + CSS (Maquetación y Estilos) | ✅ Completado | [Ver Sprint 2](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_2) |
-| **03** | Template Engines |  ✅ Completado | [Ver Sprint 3](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_3) |
-| **04** | JSON + Métodos HTTP | 🔄 En desarrollo | [Ver Sprint 4](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint-4) |
-| **05** | Middlewares + Auth | ⏳ Pendiente | *Próximamente* |
-| **06** | Bases de Datos | ⏳ Pendiente | *Próximamente* |
-| **07** | Validaciones | ⏳ Pendiente | *Próximamente* |
-| **08** | APIs + React | ⏳ Pendiente | *Próximamente* |
+- **Registro** con nombre, apellido, correo, contraseña y foto de perfil (opcional).
+- **Contraseñas cifradas** con bcrypt: nunca se guardan en texto plano.
+- **Subida de imágenes** con Multer (JPG, JPEG o PNG, hasta 2 MB).
+- **Login y logout** con sesiones. El header muestra la foto y el nombre del usuario.
+- **Perfil** del usuario.
+- **Rutas de huéspedes y de usuarios**, con middlewares.
 
 ---
 
-## 🗺️ Detalle de la Hoja de Ruta
+## 📂 Estructura del proyecto
 
-0. **Sprint 00: Actividades & Laboratorios Prácticos (`Activities`)**
-   * Ejercicios de clase, talleres complementarios y prácticas conceptuales (ej. utilidades CLI, manipulación de archivos `fs`, lógica en JavaScript, etc.).
-1. **Sprint 1: Wireframe + Boceto**
-   * Diseños de baja/alta fidelidad y prototipado interactivo del sitio en Figma.
-2. **Sprint 2: HTML + CSS**
-   * Maquetación estática, estilos visuales e interfaz *responsive*.
-3. **Sprint 3: Template Engines**
-   * Dinamización de vistas mediante motores de plantillas.
-4. **Sprint 4: JSON + Métodos HTTP**
-   * Persistencia inicial en archivos JSON y manejo de peticiones HTTP (GET, POST, PUT, DELETE).
-5. **Sprint 5: Middlewares + Auth**
-   * Validación de sesiones, protección de rutas y gestión de usuarios.
-6. **Sprint 6: Bases de Datos**
-   * Integración de base de datos para productos y pedidos.
-7. **Sprint 7: Validaciones**
-   * Control de errores, sanitización de datos y validación de formularios en backend y frontend.
-8. **Sprint 8: APIs + React**
-   * Desacoplamiento de la aplicación, arquitectura API REST y reconstrucción del cliente interactivo en React.
+```
+Desarrollo-Web-Sprint_5/
+├── .gitignore
+├── package.json
+├── README.md
+├── retro.md
+├── public/
+│   ├── css/styles.css
+│   ├── js/main.js
+│   └── images/users/             # fotos de perfil (default.svg y las que suben los usuarios)
+└── src/
+    ├── index.js                  # Servidor Express (sesiones, cookies, rutas)
+    ├── controllers/
+    │   ├── mainController.js     # Inicio y carrito
+    │   ├── authController.js     # Registro, login, logout y perfil
+    │   └── productController.js  # CRUD de productos
+    ├── database/
+    │   ├── products.json
+    │   ├── users.json            # Usuarios (contraseñas cifradas)
+    │   ├── site.json
+    │   └── cart.json
+    ├── middlewares/
+    │   ├── logger.js             # Registra cada petición
+    │   ├── locals.js             # Datos disponibles en todas las vistas
+    │   ├── auth.js               # loadUser, guestOnly y authOnly
+    │   └── uploadAvatar.js       # Subida de la foto de perfil (Multer)
+    ├── models/
+    │   └── userModel.js          # Único archivo que lee y escribe users.json
+    ├── routes/
+    │   ├── main.routes.js
+    │   ├── auth.routes.js
+    │   └── products.routes.js
+    └── views/
+        ├── partials/             # head, header, footer, product-form
+        ├── home.ejs
+        ├── index.ejs             # Listado de productos
+        ├── detail.ejs
+        ├── create.ejs
+        ├── edit.ejs
+        ├── carrito.ejs
+        ├── registro.ejs
+        ├── login.ejs
+        └── perfil.ejs
+```
 
 ---
 
-## 🛠️ Tecnologías del Proyecto
+## 🌐 Rutas y quién puede entrar
 
-* **Frontend:** HTML5, CSS3, JavaScript, React.js
-* **Backend & Datos:** Node.js, Template Engines, JSON, Bases de Datos
-* **Diseño & UI/UX:** Figma, Wireframe.cc
-* **Control de Versiones:** Git & GitHub
+| Método | Ruta | Acceso |
+|---|---|---|
+| GET | `/` | Todos |
+| GET | `/carrito` | Todos |
+| GET | `/products` | Todos |
+| GET | `/products/:id` | Todos |
+| GET / POST | `/registro` | Solo huéspedes |
+| GET / POST | `/login` | Solo huéspedes |
+| GET | `/perfil` | Solo usuarios |
+| POST | `/logout` | Solo usuarios |
+| GET | `/products/create` | Solo usuarios |
+| POST | `/products` | Solo usuarios |
+| GET | `/products/:id/edit` | Solo usuarios |
+| PUT | `/products/:id` | Solo usuarios |
+| DELETE | `/products/:id` | Solo usuarios |
+
+- Las rutas **solo para huéspedes** redirigen al perfil si ya hay una sesión iniciada.
+- Las rutas **solo para usuarios** redirigen al login si no hay sesión.
+- `PUT` y `DELETE` se simulan desde los formularios con **method-override** (`?_method=PUT` y `?_method=DELETE`).
 
 ---
 
-## 👥 Equipo de Desarrollo
+## 🗄️ Datos de usuarios (`users.json`)
 
-* **Oscar Javier Hernández Morales** - *Sistemas / Desarrollo Web*
-* **Juan David Navarro Jiménez** - *Sistemas / Desarrollo Web*
+| Campo | Descripción |
+|---|---|
+| `id` | Identificador único |
+| `firstName` | Nombre |
+| `lastName` | Apellido |
+| `email` | Correo (único) |
+| `password` | Contraseña cifrada con bcrypt |
+| `category` | `admin` o `customer`. Quien se registra queda como `customer` |
+| `image` | Ruta o URL de la foto de perfil |
+
+---
+
+## 🔒 Seguridad
+
+- Contraseñas cifradas con **bcryptjs**.
+- Al fallar el login se muestra el mismo mensaje, sin revelar si el correo existe.
+- Se genera una sesión nueva al iniciar sesión.
+- La cookie de sesión es `HttpOnly` y `SameSite=Lax`.
+- En la sesión solo se guardan datos seguros: nunca la contraseña.
+- La clave secreta de la sesión se toma de la variable de entorno `SESSION_SECRET`. Si no existe, se usa una clave de desarrollo.
+
+---
+
+## 🎯 Alcance del sprint
+
+**Funciona:**
+- Registro, login, logout y perfil.
+- Subida de foto de perfil con validación de tipo y tamaño.
+- Rutas de huéspedes y de usuarios.
+- Crear, editar y eliminar productos solo con sesión iniciada.
+
+**Limitaciones conocidas:**
+- La función **"Recordarme"** (opcional) no está incluida en esta entrega.
+- "¿Olvidaste tu contraseña?" sigue siendo maqueta.
+- Las sesiones viven en memoria: al reiniciar el servidor hay que volver a iniciar sesión.
+- La categoría `admin` todavía no tiene permisos distintos a los de `customer`.
+- El carrito sigue siendo maqueta.
+
+---
+
+## 🚀 Cómo ejecutar el proyecto
+
+1. Instalar [Node.js](https://nodejs.org/) (versión 18 o superior).
+2. Instalar las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Iniciar el servidor:
+
+   ```bash
+   npm start
+   ```
+
+   Para desarrollo, con reinicio automático:
+
+   ```bash
+   npm run dev
+   ```
+
+4. Abrir <http://localhost:3000> en el navegador.
+
+### Cuentas de prueba
+
+Son datos inventados, creados solo para probar el sitio.
+
+| Rol | Correo | Contraseña |
+|---|---|---|
+| Administrador | camila.rojas@example.com | `Mg#4821x` |
+| Cliente | valentina.perez@example.com | `Vl$5512p` |
+
+---
+
+## 🧪 Cómo probar el flujo de usuarios
+
+1. Entrar a `/registro`, enviar el formulario vacío y ver los errores. Luego completarlo, con o sin foto.
+2. Iniciar sesión en `/login` con la cuenta creada.
+3. Ver en el header la foto y el nombre, y abrir el **perfil**.
+4. Con la sesión iniciada, escribir `/login` en la barra del navegador: redirige al perfil.
+5. Cerrar sesión y escribir `/perfil` o `/products/create`: redirigen al login.
+
+---
+
+## 📝 Documentación ágil
+
+- [`retro.md`](./retro.md) — Retrospectiva del sprint 4 (estrella de mar).
+- Tablero de trabajo — enlace al inicio de este documento.
+
+---
+
+## 👥 Equipo de desarrollo
+
+- **Oscar Javier Hernández Morales** — Sistemas / Desarrollo Web
+- **Juan David Navarro Jiménez** — Sistemas / Desarrollo Web

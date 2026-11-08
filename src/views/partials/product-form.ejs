@@ -1,0 +1,87 @@
+            <% if (Object.keys(errors).length > 0) { %>
+                <div class="form-alert" role="alert">
+                    Revisa los campos marcados en rojo antes de continuar.
+                </div>
+            <% } %>
+
+            <form action="<%= action %>" method="POST" class="auth-form" novalidate>
+
+                <div class="form-group <%= errors.name ? 'has-error' : '' %>">
+                    <label for="name">Nombre del producto</label>
+                    <input type="text" id="name" name="name"
+                           value="<%= old.name || '' %>"
+                           placeholder="Ej: Granizado de Piña"
+                           aria-invalid="<%= errors.name ? 'true' : 'false' %>">
+                    <% if (errors.name) { %>
+                        <p class="form-error"><%= errors.name %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.price ? 'has-error' : '' %>">
+                    <label for="price">Precio (COP)</label>
+                    <input type="number" id="price" name="price" min="0" step="100"
+                           value="<%= old.price || '' %>"
+                           placeholder="8000"
+                           aria-invalid="<%= errors.price ? 'true' : 'false' %>">
+                    <% if (errors.price) { %>
+                        <p class="form-error"><%= errors.price %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.category ? 'has-error' : '' %>">
+                    <label for="category">Categoría</label>
+                    <select id="category" name="category"
+                            aria-invalid="<%= errors.category ? 'true' : 'false' %>">
+                        <option value="">Elige una categoría</option>
+                        <% categories.forEach(cat => { %>
+                            <option value="<%= cat %>" <%= old.category === cat ? 'selected' : '' %>><%= cat %></option>
+                        <% }) %>
+                    </select>
+                    <% if (errors.category) { %>
+                        <p class="form-error"><%= errors.category %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.sizes ? 'has-error' : '' %>">
+                    <span class="form-label">Tamaños disponibles</span>
+                    <div class="checkbox-grid">
+                        <% sizeOptions.forEach(size => { %>
+                            <label>
+                                <input type="checkbox" name="sizes" value="<%= size %>"
+                                       <%= (old.sizes || []).includes(size) ? 'checked' : '' %>>
+                                <%= size %>
+                            </label>
+                        <% }) %>
+                    </div>
+                    <% if (errors.sizes) { %>
+                        <p class="form-error"><%= errors.sizes %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.description ? 'has-error' : '' %>">
+                    <label for="description">Descripción</label>
+                    <textarea id="description" name="description" rows="4"
+                              placeholder="Cuenta de qué está hecho y cómo sabe."
+                              aria-invalid="<%= errors.description ? 'true' : 'false' %>"><%= old.description || '' %></textarea>
+                    <% if (errors.description) { %>
+                        <p class="form-error"><%= errors.description %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.image ? 'has-error' : '' %>">
+                    <label for="image">Imagen</label>
+                    <input type="text" id="image" name="image"
+                           value="<%= old.image || '' %>"
+                           placeholder="/img/mango.jpg"
+                           aria-invalid="<%= errors.image ? 'true' : 'false' %>">
+                    <p class="form-hint">Ruta de una imagen dentro de public/img, por ejemplo /img/mango.jpg.</p>
+                    <% if (errors.image) { %>
+                        <p class="form-error"><%= errors.image %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"><%= submitText %></button>
+                    <a href="/products" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
