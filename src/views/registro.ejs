@@ -1,0 +1,102 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+    <main class="auth-section">
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <span class="sub-label">ÚNETE A MANGLÜ</span>
+                <h1>Crear cuenta</h1>
+                <p>Regístrate para ver tu historial de compras y pedir más rápido la próxima vez.</p>
+            </div>
+
+            <% if (Object.keys(errors).length > 0) { %>
+                <div class="form-alert" role="alert">
+                    Revisa los campos marcados en rojo antes de continuar.
+                </div>
+            <% } %>
+
+            <form action="/registro" method="POST" enctype="multipart/form-data" class="auth-form" novalidate>
+
+                <div class="form-group <%= errors.firstName ? 'has-error' : '' %>">
+                    <label for="firstName">Nombre</label>
+                    <input type="text" id="firstName" name="firstName"
+                           value="<%= old.firstName || '' %>"
+                           placeholder="Ej: María" autocomplete="given-name"
+                           aria-invalid="<%= errors.firstName ? 'true' : 'false' %>">
+                    <% if (errors.firstName) { %>
+                        <p class="form-error"><%= errors.firstName %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.lastName ? 'has-error' : '' %>">
+                    <label for="lastName">Apellido</label>
+                    <input type="text" id="lastName" name="lastName"
+                           value="<%= old.lastName || '' %>"
+                           placeholder="Ej: Pérez" autocomplete="family-name"
+                           aria-invalid="<%= errors.lastName ? 'true' : 'false' %>">
+                    <% if (errors.lastName) { %>
+                        <p class="form-error"><%= errors.lastName %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.email ? 'has-error' : '' %>">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email"
+                           value="<%= old.email || '' %>"
+                           placeholder="nombre@correo.com" autocomplete="email"
+                           aria-invalid="<%= errors.email ? 'true' : 'false' %>">
+                    <% if (errors.email) { %>
+                        <p class="form-error"><%= errors.email %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.password ? 'has-error' : '' %>">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password"
+                           placeholder="Mínimo 8 caracteres" autocomplete="new-password"
+                           aria-invalid="<%= errors.password ? 'true' : 'false' %>">
+                    <% if (errors.password) { %>
+                        <p class="form-error"><%= errors.password %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.confirmPassword ? 'has-error' : '' %>">
+                    <label for="confirmPassword">Confirmar contraseña</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword"
+                           placeholder="Repite tu contraseña" autocomplete="new-password"
+                           aria-invalid="<%= errors.confirmPassword ? 'true' : 'false' %>">
+                    <% if (errors.confirmPassword) { %>
+                        <p class="form-error"><%= errors.confirmPassword %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group <%= errors.avatar ? 'has-error' : '' %>">
+                    <label for="avatar">Foto de perfil <span class="optional">(opcional)</span></label>
+                    <input type="file" id="avatar" name="avatar" accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                           aria-invalid="<%= errors.avatar ? 'true' : 'false' %>">
+                    <p class="form-hint">JPG, JPEG o PNG, de hasta 2 MB. Si no subes una, se usará una imagen por defecto.</p>
+                    <% if (errors.avatar) { %>
+                        <p class="form-error"><%= errors.avatar %></p>
+                    <% } %>
+                </div>
+
+                <div class="form-group form-check <%= errors.terms ? 'has-error' : '' %>">
+                    <label for="terms">
+                        <input type="checkbox" id="terms" name="terms" value="si">
+                        Acepto los términos y condiciones
+                    </label>
+                    <% if (errors.terms) { %>
+                        <p class="form-error"><%= errors.terms %></p>
+                    <% } %>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear cuenta</button>
+            </form>
+
+            <p class="auth-alt">¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+
+        </div>
+    </main>
+
+<%- include('partials/footer') %>
