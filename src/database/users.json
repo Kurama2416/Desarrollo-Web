@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "firstName": "Camila",
+    "lastName": "Rojas",
+    "email": "camila.rojas@example.com",
+    "password": "$2b$10$qeTU.d5.AN/f5RlTkl6BUuhH4VrslGNCSgebtVM0Vmu2u8Kzrzm9y",
+    "category": "admin",
+    "image": "https://robohash.org/camilarojas.png?size=80x80&set=set1"
+  },
+  {
+    "id": 2,
+    "firstName": "Andrés",
+    "lastName": "Gómez",
+    "email": "andres.gomez@example.com",
+    "password": "$2b$10$dJFLVW1N/y.nMeyE2R9tQ.wTg5PlsakMjxlXB5e0lQzFO/4MQNY7G",
+    "category": "admin",
+    "image": "https://robohash.org/andresgomez.png?size=80x80&set=set1"
+  },
+  {
+    "id": 3,
+    "firstName": "Valentina",
+    "lastName": "Pérez",
+    "email": "valentina.perez@example.com",
+    "password": "$2b$10$8YiS/96xjmtKGu/zRZHc1OLATMIiml43z0kfOXqs0jABQtNQhMFnG",
+    "category": "customer",
+    "image": "https://robohash.org/valentinaperez.png?size=80x80&set=set1"
+  },
+  {
+    "id": 4,
+    "firstName": "Santiago",
+    "lastName": "Torres",
+    "email": "santiago.torres@example.com",
+    "password": "$2b$10$9DZY9JCbPNf22p4vmlXV8.0p4RGc3.kbLBWF5o9E8kVR6kn2bCLdC",
+    "category": "customer",
+    "image": "https://robohash.org/santiagotorres.png?size=80x80&set=set1"
+  },
+  {
+    "id": 5,
+    "firstName": "Laura",
+    "lastName": "Martínez",
+    "email": "laura.martinez@example.com",
+    "password": "$2b$10$NPj25ZGNJ6iX4twnhVzlc.fPQD6.4h1f1rme5UoHj8MX.YKo7Sl1O",
+    "category": "customer",
+    "image": "https://robohash.org/lauramartinez.png?size=80x80&set=set1"
+  },
+  {
+    "id": 6,
+    "firstName": "Mateo",
+    "lastName": "Ramírez",
+    "email": "mateo.ramirez@example.com",
+    "password": "$2b$10$jRzd8tjFpzVobWtRHbQ/k.rTrFPTCQRb5jDE9AZ6Fm90OQnEIfev.",
+    "category": "customer",
+    "image": "https://robohash.org/mateoramirez.png?size=80x80&set=set1"
+  },
+  {
+    "id": 7,
+    "firstName": "Daniela",
+    "lastName": "Castro",
+    "email": "daniela.castro@example.com",
+    "password": "$2b$10$rHN6C92Zeo2u41w5QXvHPeYBqw4ANH3LRTJGiJnPbxtL9ssBmVF32",
+    "category": "customer",
+    "image": "https://robohash.org/danielacastro.png?size=80x80&set=set1"
+  },
+  {
+    "id": 8,
+    "firstName": "Sebastián",
+    "lastName": "Moreno",
+    "email": "sebastian.moreno@example.com",
+    "password": "$2b$10$7hwPNCs97cAGsf2154zYsOu8vyG88fhcnNYcEmNRp9CyLYgGpwdiy",
+    "category": "customer",
+    "image": "https://robohash.org/sebastianmoreno.png?size=80x80&set=set1"
+  },
+  {
+    "id": 9,
+    "firstName": "Isabella",
+    "lastName": "Vargas",
+    "email": "isabella.vargas@example.com",
+    "password": "$2b$10$SpJG7XMxwLAwWQV5wWP0Hu82gIbMgZ1QwQtVQj4xYxXx9/0jVhCXy",
+    "category": "customer",
+    "image": "https://robohash.org/isabellavargas.png?size=80x80&set=set1"
+  },
+  {
+    "id": 10,
+    "firstName": "Juan",
+    "lastName": "Herrera",
+    "email": "juan.herrera@example.com",
+    "password": "$2b$10$fAxhbFGUzIGG8Gpsb7Nvg.g6YkLb.uBgNxLGMuLg0Jk7XaqXOZCIW",
+    "category": "customer",
+    "image": "https://robohash.org/juanherrera.png?size=80x80&set=set1"
+  },
+  {
+    "id": 11,
+    "firstName": "juan",
+    "lastName": "navarro",
+    "email": "juannavarr222@gmail.com",
+    "password": "$2b$10$tG4Stel45.ABrt4Zr.7GU.wyt60MlMvcXtFUb21q3oULAiSx/Lm2S",
+    "category": "customer",
+    "image": "/images/users/default.svg"
+  }
+]
