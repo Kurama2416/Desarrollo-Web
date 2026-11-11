@@ -1,0 +1,87 @@
+
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+<main class="list-section">
+    <div class="list-container">
+
+        <nav class="breadcrumb" aria-label="Ruta de navegación">
+            <a href="/">Inicio</a>
+            <span>/</span>
+            <a href="/admin/users">Usuarios</a>
+            <span>/</span>
+            <span>Detalle</span>
+        </nav>
+
+        <div class="list-toolbar">
+            <div>
+                <span class="sub-label">ADMINISTRACIÓN</span>
+                <h1>Detalle del usuario</h1>
+                <p class="list-count">
+                    Información del usuario registrado en Manglü
+                </p>
+            </div>
+        </div>
+
+        <section class="user-detail-card">
+
+            <h2>
+                <%= selectedUser.firstName %>
+                <%= selectedUser.lastName %>
+            </h2>
+
+            <div class="user-detail-info">
+
+                <p>
+                    <strong>ID:</strong>
+                    <%= selectedUser.id %>
+                </p>
+
+                <p>
+                    <strong>Nombre:</strong>
+                    <%= selectedUser.firstName %>
+                </p>
+
+                <p>
+                    <strong>Apellido:</strong>
+                    <%= selectedUser.lastName %>
+                </p>
+
+                <p>
+                    <strong>Correo electrónico:</strong>
+                    <%= selectedUser.email %>
+                </p>
+
+                <p>
+                    <strong>Rol:</strong>
+                    <%= selectedUser.category === 'admin'
+                        ? 'Administrador'
+                        : 'Cliente' %>
+                </p>
+
+            </div>
+
+            <div class="user-detail-actions">
+
+                <a
+                    href="/admin/users/<%= selectedUser.id %>/editar"
+                    class="btn btn-primary"
+                >
+                    Editar usuario
+                </a>
+
+                <a
+                    href="/admin/users"
+                    class="btn btn-outline"
+                >
+                    Volver a usuarios
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+</main>
+
+<%- include('../../partials/footer') %>

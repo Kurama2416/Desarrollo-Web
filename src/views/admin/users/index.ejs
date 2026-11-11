@@ -1,0 +1,115 @@
+
+<%- include('../../partials/head') %>
+<%- include('../../partials/header') %>
+
+<main class="detail-section">
+  <div class="detail-container">
+
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="/">Inicio</a>
+      <span>/</span>
+      <span>Administración de usuarios</span>
+    </nav>
+
+    <div class="section-header">
+      <span class="sub-label">PANEL ADMINISTRATIVO</span>
+      <h1>Administrar usuarios</h1>
+      <p>Consulta y gestiona las cuentas registradas en Manglü.</p>
+    </div>
+
+    <div style="margin: 25px 0;">
+      <a href="/admin/users/crear" class="btn btn-primary">
+        + Crear usuario
+      </a>
+    </div>
+
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; text-align: left;">
+
+        <thead>
+          <tr style="border-bottom: 2px solid #ddd;">
+            <th style="padding: 12px;">ID</th>
+            <th style="padding: 12px;">Nombre</th>
+            <th style="padding: 12px;">Correo</th>
+            <th style="padding: 12px;">Rol</th>
+            <th style="padding: 12px;">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% users.forEach(user => { %>
+            <tr style="border-bottom: 1px solid #eee;">
+
+              <td style="padding: 12px;">
+                <%= user.id %>
+              </td>
+
+              <td style="padding: 12px;">
+                <%= user.firstName %> <%= user.lastName %>
+              </td>
+
+              <td style="padding: 12px;">
+                <%= user.email %>
+              </td>
+
+              <td style="padding: 12px;">
+                <%= user.category === 'admin'
+                    ? 'Administrador'
+                    : 'Cliente' %>
+              </td>
+
+              <td style="padding: 12px;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+
+                  <!-- VER DETALLE -->
+                  <a
+                    href="/admin/users/<%= user.id %>"
+                    class="btn btn-primary"
+                  >
+                    Ver detalle
+                  </a>
+
+                  <!-- EDITAR USUARIO -->
+                  <a
+                    href="/admin/users/<%= user.id %>/editar"
+                    class="btn btn-outline"
+                  >
+                    Editar
+                  </a>
+
+                  <!-- ELIMINAR USUARIO -->
+                  <form
+                    action="/admin/users/<%= user.id %>?_method=DELETE"
+                    method="POST"
+                    onsubmit="return confirm('¿Estás seguro de eliminar este usuario? También podrían eliminarse sus carritos asociados.');"
+                  >
+                    <button
+                      type="submit"
+                      class="btn btn-outline"
+                      <%= Number(user.id) === Number(locals.user?.id)
+                          ? 'disabled'
+                          : '' %>
+                    >
+                      Eliminar
+                    </button>
+                  </form>
+
+                </div>
+              </td>
+
+            </tr>
+          <% }) %>
+        </tbody>
+
+      </table>
+    </div>
+
+    <% if (users.length === 0) { %>
+      <p>No hay usuarios registrados.</p>
+    <% } %>
+
+  </div>
+</main>
+
+<%- include('../../partials/footer') %>
+
