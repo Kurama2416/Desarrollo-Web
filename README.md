@@ -28,7 +28,7 @@ Haz clic en cualquier sprint o sección para ir directamente al código y la doc
 | **04** | JSON + Métodos HTTP | ✅ Completado | [Ver Sprint 4](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint-4) |
 | **05** | Middlewares + Auth | ✅ Completado | [Ver Sprint 5](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_5)  |
 | **06** | Bases de Datos | ✅ Completado | [Ver Sprint 6](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_6)  |
-| **07** | Validaciones | ✅ Completado | [Ver Sprint ](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_7)  |
+| **07** | Validaciones | ✅ Completado | [Ver Sprint 7](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_7)  |
 | **08** | APIs + React | ⏳ Pendiente | *Próximamente* |
 
 ---
