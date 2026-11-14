@@ -5,7 +5,7 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 
 const dbPath = path.join(__dirname, '..', 'database', 'users.json');
-const DEFAULT_IMAGE = '/images/users/default.svg';
+const DEFAULT_IMAGE = '/img/users/default.svg';
 
 // ===== Acceso al archivo JSON (siempre actualizado, sin caché) =====
 function readUsers() {
