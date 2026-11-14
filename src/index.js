@@ -6,7 +6,7 @@ const path = require('path');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const { loadUser } = require('./middlewares/auth');
+const { loadUser, rememberUser } = require('./middlewares/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -48,6 +48,9 @@ app.use(session({
 
 // Deja datos y funciones disponibles en todas las vistas
 app.use(require('./middlewares/locals'));
+
+// Si el visitante marcó "Recordarme", vuelve a iniciar su sesión desde la cookie
+app.use(rememberUser);
 
 // Deja al usuario logueado (o null) disponible en todas las vistas
 app.use(loadUser);
