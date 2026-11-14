@@ -25,10 +25,10 @@ Haz clic en cualquier sprint o sección para ir directamente al código y la doc
 | **01** | Wireframe + Boceto (UI/UX en Figma) | ✅ Completado | [Ver Sprint 1](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_1) |
 | **02** | HTML + CSS (Maquetación y Estilos) | ✅ Completado | [Ver Sprint 2](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_2) |
 | **03** | Template Engines |  ✅ Completado | [Ver Sprint 3](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_3) |
-| **04** | JSON + Métodos HTTP | 🔄 En desarrollo | [Ver Sprint 4](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint-4) |
-| **05** | Middlewares + Auth | ⏳ Pendiente | *Próximamente* |
-| **06** | Bases de Datos | ⏳ Pendiente | *Próximamente* |
-| **07** | Validaciones | ⏳ Pendiente | *Próximamente* |
+| **04** | JSON + Métodos HTTP | ✅ Completado | [Ver Sprint 4](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint-4) |
+| **05** | Middlewares + Auth | ✅ Completado | [Ver Sprint 5](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_5)  |
+| **06** | Bases de Datos | ✅ Completado | [Ver Sprint 6](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_6)  |
+| **07** | Validaciones | ✅ Completado | [Ver Sprint ](https://github.com/Kurama2416/Desarrollo-Web/tree/Sprint_7)  |
 | **08** | APIs + React | ⏳ Pendiente | *Próximamente* |
 
 ---
