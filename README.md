@@ -6,7 +6,7 @@ Sitio web de **Manglü**, granizados artesanales colombianos. Aplicación **Node
 
 ## 📋 Tablero de trabajo
 
-🔗 **[PEGAR AQUÍ EL ENLACE A TRELLO O GITHUB PROJECTS]**
+🔗 **[Notion](https://app.notion.com/p/cd082a203a9f4e708914ee56db1a5a42?v=412c68aefc098149bd60000cfe9d8ebb)**
 
 ---
 
@@ -183,7 +183,7 @@ Son datos inventados, creados solo para probar el sitio.
 ## 📝 Documentación ágil
 
 - [`retro.md`](./retro.md) — Retrospectiva del sprint 4 (estrella de mar).
-- Tablero de trabajo — enlace al inicio de este documento.
+- Tablero de trabajo — [Notion](https://app.notion.com/p/cd082a203a9f4e708914ee56db1a5a42?v=412c68aefc098149bd60000cfe9d8ebb).
 
 ---
 
