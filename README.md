@@ -176,7 +176,7 @@ Al crear o editar un producto, el servidor revisa los campos y vuelve a mostrar 
 ## 📝 Documentación ágil
 
 - [`retro.md`](./retro.md) — Retrospectiva del sprint 3 (estrella de mar).
-- Tablero de trabajo — enlace al inicio de este documento.
+- Tablero de trabajo — [Manglü – Sprint 4](https://github.com/users/juannavarro222/projects/2/views/1).
 
 ---
 
