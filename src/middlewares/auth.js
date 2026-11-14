@@ -37,8 +37,7 @@ const loadUser = async (req, res, next) => {
   }
 };
 
-// "Recordarme" (Sprint 5): si el visitante no tiene sesión pero trae la cookie
-// firmada "manglu_remember", se le vuelve a iniciar sesión automáticamente.
+
 const REMEMBER_COOKIE = 'manglu_remember';
 
 const rememberUser = async (req, res, next) => {
