@@ -6,7 +6,7 @@ En el Sprint 6 se incorporó **MySQL** y **Sequelize** para almacenar productos,
 
 ## 📋 Tablero de trabajo
 
-**Enlace:** _(pegar aquí el enlace del tablero actualizado para el Sprint 7)_
+**[Notion](https://app.notion.com/p/0d733a3d10c54e80a5270063dbbfa953?v=412c68aefc0981569301000c728f2003)**
 
 ## ✨ Funcionalidades del proyecto
 
