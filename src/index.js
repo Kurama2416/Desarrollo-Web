@@ -6,13 +6,12 @@ const path = require('path');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const { loadUser } = require('./middlewares/auth');
+const { loadUser, rememberUser } = require('./middlewares/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Clave con la que se firman la sesión y las cookies.
-// En un sitio real debe venir de una variable de entorno (SESSION_SECRET).
+
 const SESSION_SECRET = process.env.SESSION_SECRET || 'manglu-clave-secreta-de-desarrollo';
 
 // Motor de vistas: EJS, con las plantillas en src/views
@@ -37,9 +36,7 @@ app.use(require('./middlewares/logger'));
 // Van antes de la sesión para que cargar una imagen no abra una sesión.
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// Compatibilidad: en el Sprint 6 las fotos y la imagen por defecto se guardaban en la base
-// con la ruta /images/users/... pero los archivos viven en public/img/users.
-// Estas dos líneas hacen que esas rutas antiguas sigan funcionando.
+
 app.use('/images', express.static(path.join(__dirname, '..', 'public', 'images')));
 app.use('/images', express.static(path.join(__dirname, '..', 'public', 'img')));
 
@@ -54,6 +51,9 @@ app.use(session({
 
 // Deja datos y funciones disponibles en todas las vistas
 app.use(require('./middlewares/locals'));
+
+// Si el visitante marcó "Recordarme", vuelve a iniciar su sesión desde la cookie
+app.use(rememberUser);
 
 // Deja al usuario logueado (o null) disponible en todas las vistas
 app.use(loadUser);
