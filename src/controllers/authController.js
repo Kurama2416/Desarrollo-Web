@@ -1,5 +1,8 @@
 const userModel = require('../models/userModel');
 const { getErrors, removeUploadedFile } = require('../middlewares/validations/helpers');
+const { REMEMBER_COOKIE } = require('../middlewares/auth');
+
+const REMEMBER_DAYS = 30;
 
 const roleLabels = {
   admin: 'Administrador',
@@ -18,8 +21,7 @@ const authController = {
     });
   },
 
-  // Las reglas viven en middlewares/validations/userValidations.js (express-validator).
-  // Aquí solo se lee el resultado.
+  
   registerSubmit: async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
     const errors = getErrors(req);
@@ -51,8 +53,7 @@ const authController = {
       console.error('Error al registrar usuario:', error);
       removeUploadedFile(req.file);
 
-      // Dos registros simultáneos con el mismo correo: la base de datos es
-      // la última barrera (índice único del campo email).
+     
       const duplicateEmail =
         error.name === 'SequelizeUniqueConstraintError';
 
@@ -93,8 +94,7 @@ const authController = {
     try {
       const user = await userModel.authenticate(email, password);
 
-      // El correo existe (lo comprobó el validador), así que si no hay
-      // usuario es porque la contraseña no coincide con la de la base.
+      
       if (!user) {
         return res.status(401).render('login', {
           title: 'Iniciar sesión | Manglü',
@@ -118,6 +118,16 @@ const authController = {
             return res.status(500).send('No se pudo guardar la sesión.');
           }
 
+          // "Recordarme en este dispositivo": cookie firmada que dura 30 días
+          if (req.body.remember === 'si') {
+            res.cookie(REMEMBER_COOKIE, String(user.id), {
+              signed: true,
+              httpOnly: true,
+              sameSite: 'lax',
+              maxAge: REMEMBER_DAYS * 24 * 60 * 60 * 1000
+            });
+          }
+
           return res.redirect('/');
         });
       });
@@ -136,8 +146,8 @@ const authController = {
     }
   },
 
-  // ===== CONSULTA DE CORREO (la usa el JavaScript del formulario) =====
-  // GET /api/email-exists?email=...  →  { exists: true|false }
+  // ===== CONSULTA DE CORREO  =====
+  
 
   emailExists: async (req, res) => {
     const email = String(req.query.email ?? '').trim();
@@ -165,7 +175,7 @@ const authController = {
       }
 
       res.clearCookie('connect.sid');
-      res.clearCookie('manglu_remember');
+      res.clearCookie(REMEMBER_COOKIE);
 
       return res.redirect('/');
     });
