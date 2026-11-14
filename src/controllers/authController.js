@@ -1,6 +1,8 @@
-
 const fs = require('fs');
 const userModel = require('../models/userModel');
+const { REMEMBER_COOKIE } = require('../middlewares/auth');
+
+const REMEMBER_DAYS = 30;
 
 function removeUploadedFile(file) {
   if (file && file.path) {
@@ -159,6 +161,16 @@ const authController = {
             return res.status(500).send('No se pudo guardar la sesión.');
           }
 
+          // "Recordarme en este dispositivo": cookie firmada que dura 30 días
+          if (req.body.remember === 'si') {
+            res.cookie(REMEMBER_COOKIE, String(user.id), {
+              signed: true,
+              httpOnly: true,
+              sameSite: 'lax',
+              maxAge: REMEMBER_DAYS * 24 * 60 * 60 * 1000
+            });
+          }
+
           return res.redirect('/');
         });
       });
@@ -187,7 +199,7 @@ const authController = {
       }
 
       res.clearCookie('connect.sid');
-      res.clearCookie('manglu_remember');
+      res.clearCookie(REMEMBER_COOKIE);
 
       return res.redirect('/');
     });
