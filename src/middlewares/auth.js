@@ -1,4 +1,3 @@
-
 const { User } = require('../../models');
 
 // Comprueba que el usuario de la sesión exista en MySQL.
@@ -38,6 +37,42 @@ const loadUser = async (req, res, next) => {
   }
 };
 
+// "Recordarme" (Sprint 5): si el visitante no tiene sesión pero trae la cookie
+// firmada "manglu_remember", se le vuelve a iniciar sesión automáticamente.
+const REMEMBER_COOKIE = 'manglu_remember';
+
+const rememberUser = async (req, res, next) => {
+  try {
+    if (req.session?.user) return next();
+
+    const userId = Number(req.signedCookies?.[REMEMBER_COOKIE]);
+
+    if (!Number.isInteger(userId) || userId <= 0) return next();
+
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      res.clearCookie(REMEMBER_COOKIE);
+      return next();
+    }
+
+    req.session.user = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      category: user.category,
+      image: user.image
+    };
+
+    return next();
+
+  } catch (error) {
+    console.error('Error al recordar usuario:', error);
+    return next(error);
+  }
+};
+
 // Solo permite entrar a visitantes sin sesión.
 const guestOnly = (req, res, next) => {
   if (req.session?.user) {
@@ -58,6 +93,8 @@ const authOnly = (req, res, next) => {
 
 module.exports = {
   loadUser,
+  rememberUser,
+  REMEMBER_COOKIE,
   guestOnly,
   authOnly
 };
