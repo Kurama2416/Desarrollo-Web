@@ -62,6 +62,7 @@ Haz clic en cualquier sprint o sección para ir directamente al código y la doc
 * **Backend & Datos:** Node.js, Template Engines, JSON, Bases de Datos
 * **Diseño & UI/UX:** Figma, Wireframe.cc
 * **Control de Versiones:** Git & GitHub
+* **Notion:** [Sprint 4 al 7](https://app.notion.com/p/Mangl-Tableros-de-trabajo-Sprints-4-a-7-412c68aefc0981af83a0ddbd072a13be)
 
 ---
 
